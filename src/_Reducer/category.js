@@ -7,7 +7,7 @@ export default function(state = initialState, action){
         case  "GET-CATEGORIES" :
             return {
                 ...state,
-                category: action.payload.categories
+                category: action.payload
             };
             break;
         

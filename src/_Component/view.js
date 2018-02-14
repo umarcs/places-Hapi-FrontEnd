@@ -12,15 +12,15 @@ const marginSearchBarNav = style({
     marginRight: '200px',
 })
 class View extends Component {
-    constructor() {
+    constructor(){
         super();
         this.getCategoryList = this.getCategoryList.bind(this)
         this.getPlaces = this.getPlaces.bind(this)
     }
-    getCategoryList() {
+    getCategoryList(){
         this.props.getCategories()
     }
-    getPlaces(id) {
+    getPlaces(id){
         this.props.places(id)
     }
     render() {
@@ -37,22 +37,21 @@ class View extends Component {
                             <ul className="navbar-nav mr-auto">
                             </ul>
                             <div className="dropdown">
-                                <button onClick={() => { this.getCategoryList() }} className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button onClick ={ ()=>{this.getCategoryList()}} className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Dropdown
                                 </button>
                                 <div className="dropdown-menu" aria-labelledby="dropdownMenu2" >
-                                    {
-                                        this.props.category
-                                            ?
-                                            this.props.category.map((data, id) => {
-                                                console.log("data is", data._id);
-
-                                                return <button key={id} onClick={() => { this.getPlaces(data._id) }} className="dropdown-item" type="button">{data.title}</button>
-                                            })
-                                            :
-                                            ''
-                                    }
-
+                                 {
+                                     this.props.category.category.categories
+                                  ?
+                                    this.props.category.category.categories.map((data, id)=>{
+                                       
+                                        return <button key={id} onClick={()=>{this.getPlaces(data._id)}} className="dropdown-item" type="button">{data.title}</button>
+                                    })
+                                  :
+                                  'aa'
+                                }
+                                    
                                 </div>
                             </div>
                             <div className={marginSearchBarNav}>
@@ -62,28 +61,27 @@ class View extends Component {
                                 </form>
                             </div>
                             <div>
-                                <ul className="navbar-nav mr-auto">
-                                    <li className="nav-item active">
-                                        <button className="btn btn-outline-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Signup</button>
-                                        {/* <a className="nav-link" href="http://www.google.com">Signup <span className="sr-only">(current)</span></a> */}
-                                    </li>
-                                    <li className="nav-item active">
-                                        <button type="button" className="btn btn-outline-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Login</button>
-                                        {/* <a className="nav-link" href="http://www.google.com">Login <span className="sr-only">(current)</span></a> */}
-                                    </li>
-                                </ul>
+                            <ul className="navbar-nav mr-auto">
+                                <li className="nav-item active">
+                                <button className="btn btn-outline-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Signup</button>
+                                    {/* <a className="nav-link" href="http://www.google.com">Signup <span className="sr-only">(current)</span></a> */}
+                                </li>
+                                <li className="nav-item active">
+                                    <button type="button" className="btn btn-outline-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Login</button>
+                                    {/* <a className="nav-link" href="http://www.google.com">Login <span className="sr-only">(current)</span></a> */}
+                                </li>
+                            </ul>
                             </div>
                         </div>
                     </nav>
                 </div>
                 {/* Map */}
-
+                
                 <div>
                     <div className="modal-body">
                         <div className="card bg-faded card-block">
-                            <Signup />
-                            <Login />
-                           
+                        <Signup />
+                        <Login />
                         </div>
                     </div>
                 </div>
@@ -96,13 +94,13 @@ class View extends Component {
 
 
 function mapStateToProps(state) {
-    console.log("f", state.category)
+
     return {
-        category: state.category
+    category: state.category,
     };
 }
 function mapDispathToProps(dispatch) {
-    return bindActionCreators({ getCategories, places }, dispatch)
+    return bindActionCreators({ getCategories, places  }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispathToProps)(View)
