@@ -11,7 +11,7 @@ var _ = require('lodash');
 // //     apiBaseUrl = 'http://localhost:2000'
 // //}
 
- 
+ //get places
 export function places(id){  
     console.log("id", id)
     const arr = [];
