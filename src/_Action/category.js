@@ -11,9 +11,8 @@ import Request from 'superagent';
 
  
 export function getCategories(){  
-    const url = "http://localhost:4000/api/categories";
+    const url = "http://localhost:2002/api/categories";
     return  Request.get(url).then((response=>{
-        console.log("cTEGORIES",response)
         return{
             type : "GET-CATEGORIES",
             payload : response.body

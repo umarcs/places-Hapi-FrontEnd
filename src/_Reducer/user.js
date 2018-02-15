@@ -1,34 +1,33 @@
 
-// let initialState = {
-//     signupUser : [],
-//     loginUser : [],
-//     updateUser : []
-// }
-// export default function (state = initialState, action) {
-//     console.log("user", action.payload)
-//     switch (action.type) {
-//         case "SIGN-UP":
-//             return {
-//                 ...state,
-//                 signupUser: action.payload
-//             };
-//             break;
+let initialState = {
+    signup : [],
+    login : [],
+    update : []
+}
+export default function (state = initialState, action) {
+    switch (action.type) {
+        case "SIGN-UP":
+            return {
+                ...state,
+                signup: action.payload
+            };
+            break;
             
-//         case "LOG-IN":
-//             return {
-//                 ...state,
-//                 loginUser: action.payload
-//             };
-//             break;
+        case "LOG-IN":
+            return {
+                ...state,
+                login: action.payload
+            };
+            break;
 
-//         case "UPDATE-USER":
-//             return {
-//                 ...state,
-//                 updateUser: action.payload
-//             };
+        case "UPDATE-USER":
+            return {
+                ...state,
+                update: action.payload
+            };
 
-//             break;
-//     }
+            break;
+    }
 
-//     return state;
-// }
+    return state;
+}

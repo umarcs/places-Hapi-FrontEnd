@@ -1,26 +1,45 @@
 import React, { Component } from 'react';
 import { style } from 'typestyle';
-import Signup from './signup';
-import Login from './login';
+import Signup from '../_Container/user/signup';
+import Login from '../_Container/user/login';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import FlatButton from 'material-ui/FlatButton';
+import { Link } from 'react-router-dom';
 
 import { getCategories } from '../_Action/category'
 import { places } from '../_Action/place';
-
+import PlaceForm from '../_Container/user/addPlace'
 const marginSearchBarNav = style({
     marginRight: '200px',
 })
 class View extends Component {
-    constructor(){
+    constructor() {
         super();
         this.getCategoryList = this.getCategoryList.bind(this)
         this.getPlaces = this.getPlaces.bind(this)
+        this.state = { value: '' };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.login = this.handleSubmit.bind(this);
+
     }
-    getCategoryList(){
+
+
+   
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert( this.state.value);
+    this.props.places(this.state.value)
+    event.preventDefault();
+  }
+    getCategoryList() {
         this.props.getCategories()
     }
-    getPlaces(id){
+    getPlaces(id) {
         this.props.places(id)
     }
     render() {
@@ -37,51 +56,58 @@ class View extends Component {
                             <ul className="navbar-nav mr-auto">
                             </ul>
                             <div className="dropdown">
-                                <button onClick ={ ()=>{this.getCategoryList()}} className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button  onClick={() => { this.getCategoryList() }} className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Dropdown
                                 </button>
-                                <div className="dropdown-menu" aria-labelledby="dropdownMenu2" >
-                                 {
-                                     this.props.category.category.categories
-                                  ?
-                                    this.props.category.category.categories.map((data, id)=>{
-                                       
-                                        return <button key={id} onClick={()=>{this.getPlaces(data._id)}} className="dropdown-item" type="button">{data.title}</button>
-                                    })
-                                  :
-                                  'aa'
+                                <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                {
+                                    this.props.category.category.categories
+                                        ?
+                                        this.props.category.category.categories.map((data, id) => {
+
+                                            return <button key={id} onClick={() => { this.getPlaces(data._id) }} className="dropdown-item" type="button" >{data.title}</button>
+                                        })
+                                        :
+                                        'aa'
                                 }
-                                    
                                 </div>
                             </div>
+                           
                             <div className={marginSearchBarNav}>
-                                <form className="form-inline my-2 my-lg-0">
-                                    <input className="form-control mr-sm-2" type="text" placeholder="Search" />
-                                    <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                <form onSubmit={this.handleSubmit}>
+                                    <label>
+                                         <input type="text" value={this.state.value} onChange={this.handleChange} />
+                                    </label>
+                                    <input type="submit" value="Submit" />
                                 </form>
+
                             </div>
                             <div>
-                            <ul className="navbar-nav mr-auto">
-                                <li className="nav-item active">
-                                <button className="btn btn-outline-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Signup</button>
-                                    {/* <a className="nav-link" href="http://www.google.com">Signup <span className="sr-only">(current)</span></a> */}
-                                </li>
-                                <li className="nav-item active">
-                                    <button type="button" className="btn btn-outline-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Login</button>
-                                    {/* <a className="nav-link" href="http://www.google.com">Login <span className="sr-only">(current)</span></a> */}
-                                </li>
-                            </ul>
+                                <ul className="navbar-nav mr-auto">
+                                    <li className="nav-item active">
+                                        <button className="btn btn-outline-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Signup</button>
+                                    </li>
+                                    <li className="nav-item active">
+                                        <button type="button" className="btn btn-outline-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Login</button>
+                                    </li>
+                                    <li className="nav-item active">
+                                        {/* <Link to="/dashboard">Back</Link> */}
+                                        <button type="button" className="btn btn-outline-primary" >Add PLace</button>
+                                    </li>
+
+                                </ul>
                             </div>
                         </div>
                     </nav>
                 </div>
                 {/* Map */}
-                
+
                 <div>
                     <div className="modal-body">
                         <div className="card bg-faded card-block">
-                        <Signup />
-                        <Login />
+                            <Signup />
+                            <Login />
+                            <PlaceForm />
                         </div>
                     </div>
                 </div>
@@ -96,11 +122,11 @@ class View extends Component {
 function mapStateToProps(state) {
 
     return {
-    category: state.category,
+        category: state.category,
     };
 }
 function mapDispathToProps(dispatch) {
-    return bindActionCreators({ getCategories, places  }, dispatch)
+    return bindActionCreators({ getCategories, places }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispathToProps)(View)

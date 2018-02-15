@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import View from './_Component/view'
+import View from './_Container/view';
+
 class App extends Component {
   render() {
     return (
-      <div>
         <View />
-      </div>
+
     );
   }
 }
