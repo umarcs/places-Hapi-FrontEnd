@@ -8,21 +8,21 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <Switch > { /* {(this.props.UserReducers.login) ? <Redirect from="/login"  exact  to='/dashboard' /> : <Redirect from="/dashboard"  exact  to='/login' /> }  */} { /* <Route  path="/dashboard" exact component={dashboard} /> */}
+          <Switch> 
 
 
-            <Route path='/dashboard' component={View} />
+          <Route path='/dashboard' component={View} />
 
-            <Route path='/' render={() =>
+          <Route path='/' render={() =>
               <p>
-              <div className="card bg-faded card-block">
-              <div className="row">
-              <h1>WELCOME</h1>
-              </div>
-              </div>
-              <h4><Link to="/dashboard">Go</Link></h4>
+                <div className="card bg-faded card-block">
+                  <div className="row">
+                   <h1>WELCOME</h1>
+                  </div>
+                </div>
+                <h4><Link to="/dashboard">Go</Link></h4>
               </p>} 
-              />
+            />
 
           </Switch>
         </div>
