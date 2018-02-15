@@ -1,8 +1,8 @@
 
 let initialState = {
-    signup : [],
-    login : [],
-    update : []
+    signup: [],
+    login: [],
+    update: []
 }
 export default function (state = initialState, action) {
     switch (action.type) {
@@ -12,7 +12,7 @@ export default function (state = initialState, action) {
                 signup: action.payload
             };
             break;
-            
+
         case "LOG-IN":
             return {
                 ...state,
@@ -26,6 +26,12 @@ export default function (state = initialState, action) {
                 update: action.payload
             };
 
+            break;
+        case 'LOAD_LOGIN':
+            return {
+                ...state,
+                login: action.payload
+            };
             break;
     }
 

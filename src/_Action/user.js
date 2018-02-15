@@ -51,6 +51,24 @@ export function login(data){
     
 // }
 
+//----------get user data through token----------
+export function getUserDataByToken(){ 
+    let token = localStorage.getItem('token')
+    const url = 'http://localhost:2002/api/user';
+     return  Request.get(url).set({'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token})
+     .then(response=>{
+        console.log("data by token send ",response)
+        return{
+            type : "LOAD_LOGIN",
+            payload: response.body
+            
+        }
+    })
+    .catch((err)=>{
+        throw new SubmissionError({_error: err })
+    })
+}
+
 
 
    

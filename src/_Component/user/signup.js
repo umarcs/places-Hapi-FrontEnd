@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field, reduxForm  } from 'redux-form'
+import { Field, reduxForm } from 'redux-form'
 import { style } from 'typestyle';
 
 
@@ -32,7 +32,7 @@ const renderField = ({
     label,
     type,
     meta: { touched, error }
-    }) => (
+}) => (
         <div>
             <label className="control-label">{label}</label>
             <div>
@@ -46,6 +46,7 @@ const signUp = props => {
     const { error, handleSubmit, pristine, reset, submitting } = props
     return (
         <div>
+
             <div className="modal fade bd-example-modal-lg" tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-lg">
                     <div className="modal-content">
@@ -101,6 +102,7 @@ const signUp = props => {
                                             <div className="row">
                                                 <div className="col-md-1">
                                                     <button className="btn btn-success" type="submit" disabled={submitting}>Sign Up</button>
+                                                    
                                                 </div>&nbsp;&nbsp;&nbsp;
                                                     <div className="col-md-1">
                                                     <button className="btn btn-secondary" type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>

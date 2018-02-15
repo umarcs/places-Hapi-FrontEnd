@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 
 import { getCategories } from '../_Action/category'
 import { places } from '../_Action/place';
-import PlaceForm from '../_Container/user/addPlace'
 const marginSearchBarNav = style({
     marginRight: '200px',
 })
