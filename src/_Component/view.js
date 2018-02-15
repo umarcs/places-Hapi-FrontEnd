@@ -107,7 +107,7 @@ class View extends Component {
                         <div className="card bg-faded card-block">
                             <Signup />
                             <Login />
-                            <PlaceForm />
+                            {/* <PlaceForm /> */}
                         </div>
                     </div>
                 </div>
