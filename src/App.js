@@ -11,7 +11,7 @@ class App extends Component {
           <Switch> 
 
 
-          <Route path='/dashboard' component={View} />
+          <Route path='/dashboassssrd' component={View} />
 
           <Route path='/' render={() =>
               <p>
