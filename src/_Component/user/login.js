@@ -2,7 +2,6 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import FlatButton from 'material-ui/FlatButton';
-import RefreshIndicatorExampleLoading from '../../loading'
 import { style } from 'typestyle';
 
 const errors = style({

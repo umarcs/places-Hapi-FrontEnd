@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import View from './_Container/view';
 import { BrowserRouter, Route, Link, NavLink, Switch, Redirect, Prompt } from 'react-router-dom';
-//import UserProfile from './_Container/user/';
 
+import profile from './_Component/user/Profile'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getUserDataByToken } from './_Action/user'
@@ -19,14 +19,7 @@ class App extends Component {
         <div>
           <Switch>
             
-            {
-            //  console.log("qqqqqq",localStorage.getItem("token"))
-              (localStorage.getItem("token"))
-                ?
-                <Redirect from="/" exact to='/userProfile' />
-                :
-                <Redirect from="/userProfile" exact to='/' />
-            }
+          
             {
               (localStorage.getItem("token"))
                 ?
@@ -34,9 +27,9 @@ class App extends Component {
                 :
                 <Redirect from="/profile" exact to='/' />
             }
-            {<Route exact path='/' component={View} />}
+            <Route exact path='/' component={View} />
+            <Route exact path='/profile' component={profile} />
 
-            <Route exact path='/userProfile' component={PlaceForm} />
 
             <Route path='*' render={() =>
               <p>
