@@ -1,5 +1,5 @@
 let initialState = {
-   category : {}
+   categories : []
 }
 
 export default function(state = initialState, action){
@@ -7,7 +7,7 @@ export default function(state = initialState, action){
         case  "GET-CATEGORIES" :
             return {
                 ...state,
-                category: action.payload
+                categories: action.payload
             };
             break;
         

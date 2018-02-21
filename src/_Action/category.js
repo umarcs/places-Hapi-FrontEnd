@@ -15,7 +15,7 @@ export function getCategories(){
     return  Request.get(url).then((response=>{
         return{
             type : "GET-CATEGORIES",
-            payload : response.body
+            payload : response.body.categories || []
         }
     }))
     

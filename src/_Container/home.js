@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import ViewCom from '../_Component/view';
+import Home from '../_Component/home';
 
 
-class View extends Component {
+class HomePage extends Component {
        
        
         render() {
             return (
                 <div>
-                     <ViewCom /> 
+                     <Home /> 
                 </div>
             )
         }
 }
 
-export default View;
+export default HomePage;

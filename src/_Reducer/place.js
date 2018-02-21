@@ -1,18 +1,30 @@
 
 let initialState = {
-    place : []
- }
- export default function(state = initialState, action){
-     console.log("palceeeee", action.payload)
-     switch(action.type){
-         case  "GET-PLACES" :
-             return {
-                 ...state,
-                 place: action.payload
-             };
-             break;
-         
-     }
- 
-     return state;
- }
+    places: []
+}
+export default function (state = initialState, action) {
+    console.log("palceeeee", action.type)
+    switch (action.type) {
+        case "GET_PLACES":
+            return {
+                ...state,
+                places: action.payload
+            };
+            break;
+
+        case "ADD_PLACE":
+            return {
+                ...state
+            };
+            break;
+        case "GET_PLACES_OF_ONE_USER":
+            return {
+                ...state,
+                places: action.payload
+            };
+            break;
+    }
+
+    
+    return state;
+}

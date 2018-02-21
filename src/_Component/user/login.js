@@ -57,7 +57,7 @@ const LoginForm = (props) => {
                                                         {error && <strong className={errors}>{error}</strong>}
                                                         <div>
                                                             <FlatButton primary={true} type="submit" disabled={submitting}>Login</FlatButton>
-                                                            }
+                                                            
                                                             <FlatButton type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</FlatButton>
                                                             {/* 
                                                             <FlatButton>

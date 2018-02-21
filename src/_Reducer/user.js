@@ -20,7 +20,7 @@ export default function (state = initialState, action) {
             };
             break;
 
-        case "UPDATE-USER":
+        case "UPDATE_USER":
             return {
                 ...state,
                 update: action.payload
@@ -31,6 +31,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 login: action.payload
+            };
+            break;
+
+            case 'LOG_OUT':
+            return {
+                initialState
             };
             break;
     }

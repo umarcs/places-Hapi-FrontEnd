@@ -28,6 +28,7 @@ export function login(data){
     const url = "http://localhost:2002/api/user/login";
     return  Request.post(url).send(data).then((Response=>{
         localStorage.setItem("token",Response.body.token);
+
         return{
             type : "LOG-IN",
             payload : Response.body
@@ -37,6 +38,29 @@ export function login(data){
         console.log("errr", err)
         throw new SubmissionError({_error: 'Email Or Password Incorrect!' })
     })
+}
+
+export function update(data){    
+    let token= localStorage.getItem("token")
+    const id= data._id
+   const  updatedData= {
+        firstName: data.firstName,
+        lastName: data.lastName,
+    }
+    console.log("data ,", data)
+    const url = `http://localhost:2002/api/user/${id}`
+    return Request.put(url).set({'Content-Type': 'application/json', 'Authorization': 'Bearer' + token })
+    .send(updatedData).then((Response=>{
+        //localStorage.setItem('login', JSON.stringify(Response.body));
+      console.log("data is here:", Response.body)
+       //return Response;
+       return {
+           type :"UPDATE_USER",
+           payload: Response.body
+       }
+       
+   }))
+   
 }
 
 // export function update(id){  
@@ -69,6 +93,13 @@ export function getUserDataByToken(){
     })
 }
 
+
+export function Logout(){
+    localStorage.clear();
+    return{
+        type: "LOG_OUT"
+    }
+}
 
 
    

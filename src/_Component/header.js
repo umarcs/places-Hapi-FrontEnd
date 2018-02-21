@@ -8,40 +8,56 @@ import FlatButton from 'material-ui/FlatButton';
 import { Link } from 'react-router-dom';
 
 import { getCategories } from '../_Action/category'
-import { places } from '../_Action/place';
+import { getPlaces } from '../_Action/place';
+import PlaceForm from '../_Container/user/addPlace'
 const marginSearchBarNav = style({
     marginRight: '200px',
 })
 class View extends Component {
     constructor() {
         super();
-        this.getCategoryList = this.getCategoryList.bind(this)
-        this.getPlaces = this.getPlaces.bind(this)
-        this.state = { value: '' };
+        this.searchPlaces = this.searchPlaces.bind(this)
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.login = this.handleSubmit.bind(this);
+
+        this.state = {
+            selectCat: null,
+            inputVal: ''
+        };
 
     }
 
 
-   
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event) {
-    alert( this.state.value);
-    this.props.places(this.state.value)
-    event.preventDefault();
-  }
-    getCategoryList() {
+    componentDidMount() {
         this.props.getCategories()
     }
-    getPlaces(id) {
-        this.props.places(id)
+
+    handleChange(event) {
+
+        console.log(event.target.name, event.target.value)
+
+
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+
     }
+
+    searchPlaces() {
+        const { selectCat: c, inputVal: q } = this.state;
+        let query = {};
+        if (c) {
+            query.c = c
+        }
+        if (q) {
+            query.q = q
+        }
+
+        console.log("query is: ", query)
+        this.props.getPlaces(query)
+    }
+
     render() {
+        console.log("this.props: ", this.state)
         return (
             <div>
                 <div>
@@ -55,30 +71,29 @@ class View extends Component {
                             <ul className="navbar-nav mr-auto">
                             </ul>
                             <div className="dropdown">
-                                <button  onClick={() => { this.getCategoryList() }} className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Dropdown
-                                </button>
-                                <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                {
-                                    this.props.category.category.categories
-                                        ?
-                                        this.props.category.category.categories.map((data, id) => {
-
-                                            return <button key={id} onClick={() => { this.getPlaces(data._id) }} className="dropdown-item" type="button" >{data.title}</button>
+                                <select name="selectCat" onClick={this.searchPlaces} value={this.state.selectCat}  onChange={this.handleChange} >
+                                    <option />
+                                    {
+                                        this.props.categories.map((data, id) => {
+                                            return <option  value={data._id} key={id}>{data.title}</option>
                                         })
-                                        :
-                                        'aa'
-                                }
-                                </div>
+                                    }
+                                </select>
+                                {/* <select name="selectCat" value={this.state.selectCat} onChange={this.handleChange}>
+                                    <option value="grapefruit">Grapefruit</option>
+                                    <option value="lime">Lime</option>
+                                    <option value="coconut">Coconut</option>
+                                    <option value="mango">Mango</option>
+                                </select> */}
+
                             </div>
-                           
+
                             <div className={marginSearchBarNav}>
-                                <form onSubmit={this.handleSubmit}>
-                                    <label>
-                                         <input type="text" value={this.state.value} onChange={this.handleChange} />
-                                    </label>
-                                    <input type="submit" value="Submit" />
-                                </form>
+                                <label>
+                                    <input type="text" name="inputVal" value={this.state.inputVal} onChange={this.handleChange} />
+                                </label>
+                                <input type="button" value="Search" onClick={this.searchPlaces} />
+                                {/* </form> */}
 
                             </div>
                             <div>
@@ -101,15 +116,8 @@ class View extends Component {
                 </div>
                 {/* Map */}
 
-                <div>
-                    <div className="modal-body">
-                        <div className="card bg-faded card-block">
-                            <Signup />
-                            <Login />
-                            {/* <PlaceForm /> */}
-                        </div>
-                    </div>
-                </div>
+                <Signup />
+                <Login />
             </div>
 
         )
@@ -119,13 +127,13 @@ class View extends Component {
 
 
 function mapStateToProps(state) {
-
+    //console.log("state is here", state)
     return {
-        category: state.category,
+        categories: state.category.categories,
     };
 }
 function mapDispathToProps(dispatch) {
-    return bindActionCreators({ getCategories, places }, dispatch)
+    return bindActionCreators({ getCategories, getPlaces }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispathToProps)(View)
