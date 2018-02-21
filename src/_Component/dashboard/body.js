@@ -50,7 +50,7 @@ class Dashboard extends React.Component {
               
 
             {/* <Route exact path="/dashboard" component={dashboard} /> */}
-            {/* <UserPlaces /> */}
+            <UserPlaces />
             {/* <AddPlace  /> */}
             {/* <UpdatePlace /> */}
             {/* <UpdateUserForm onSubmit= {this.updateUser} /> */}
