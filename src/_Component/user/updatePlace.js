@@ -54,7 +54,7 @@ class UpdatePlace extends Component {
         return (
             <div className="container  ">
                 <div className="card bg-faded card-block ">
-                    <h2>Add Place</h2>
+                    <h2>Update Place</h2>
                 </div>
                 <div className=" card bg-faded card-block">
                     <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>

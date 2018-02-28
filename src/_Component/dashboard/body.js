@@ -7,31 +7,28 @@ import { Button, ButtonGroup } from 'react-bootstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 //import Profile from './profile';
 import { update } from '../../_Action/user';
-import UpdateUserForm from '../user/updateUser';
-import AddPlace from '../user/addPlace';
-import UpdatePlace from '../user/updatePlace';
-import UserPlaces from '../user/userPlaces'
 
 import Header from './header';
 import Footer from './footer'
 import { BrowserRouter, Route, Link, NavLink, Switch, Redirect, Prompt } from 'react-router-dom';
 
 class Dashboard extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.updateUser = this.updateUser.bind(this)
     this.PlaceAdd = this.PlaceAdd.bind(this)
 
   }
 
   updateUser(data) {
-    console.log("fdfdfdfdf>>>>", data)
     this.props.update(data)
   }
   PlaceAdd(data) {
     console.log("add palce data is ", data)
   }
   render() {
+
+
     return (
 
       <div>
@@ -46,16 +43,12 @@ class Dashboard extends React.Component {
               </li>
               <li className="breadcrumb-item active">My Dashboard</li>
             </ol>
-            
-              
 
-            {/* <Route exact path="/dashboard" component={dashboard} /> */}
-            <UserPlaces />
-            {/* <AddPlace  /> */}
-            {/* <UpdatePlace /> */}
-            {/* <UpdateUserForm onSubmit= {this.updateUser} /> */}
+            {this.props.children}
+ 
+            {/* { (baseUrl.indexOf('/admin') >= 0) ? <leftSideBar /> : "" } */}
 
-            {/* <Profile /> */}
+      
           </div>
           <Footer />
           <a className="scroll-to-top rounded" href="#page-top">
@@ -63,8 +56,6 @@ class Dashboard extends React.Component {
           </a>
         </div>
       </div>
-
-
     )
   }
 };

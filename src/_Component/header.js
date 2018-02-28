@@ -79,12 +79,7 @@ class View extends Component {
                                         })
                                     }
                                 </select>
-                                {/* <select name="selectCat" value={this.state.selectCat} onChange={this.handleChange}>
-                                    <option value="grapefruit">Grapefruit</option>
-                                    <option value="lime">Lime</option>
-                                    <option value="coconut">Coconut</option>
-                                    <option value="mango">Mango</option>
-                                </select> */}
+                              
 
                             </div>
 
@@ -104,10 +99,7 @@ class View extends Component {
                                     <li className="nav-item active">
                                         <button type="button" className="btn btn-outline-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Login</button>
                                     </li>
-                                    <li className="nav-item active">
-                                        {/* <Link to="/dashboard">Back</Link> */}
-                                        <button type="button" className="btn btn-outline-primary" >Add PLace</button>
-                                    </li>
+                                    
 
                                 </ul>
                             </div>

@@ -43,6 +43,7 @@
     "react-bootstrap": "^0.32.1",
     "react-dom": "^15.1.0",
     "react-menu-bar": "^2.0.4",
+    "react-nested-route": "^1.0.0",
     "react-redux": "^4.4.5",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
