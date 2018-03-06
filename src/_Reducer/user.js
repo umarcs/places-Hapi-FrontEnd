@@ -23,7 +23,7 @@ export default function (state = initialState, action) {
         case "UPDATE_USER":
             return {
                 ...state,
-                update: action.payload
+                login: action.payload
             };
 
             break;

@@ -11,14 +11,14 @@ import { getCategories } from './_Action/category'
 
 import addPlace from './_Component/user/addPlace'
 import userPlaces from './_Component/user/userPlaces'
-import updateUser from './_Component/user/updateUser';
+import updateUser from './_Container/user/updateUser';
 import updatePlace from './_Component/user/updatePlace';
 import dashboard from './_Component/user/profile';
 
 class App extends Component {
   componentDidMount() {
     if (localStorage.token) {
-      this.props.getUserDataByToken();
+      this.props.getUserDataByToken();``
       this.props.getCategories();
       <Redirect to='/dashboard' from='/' />
 

@@ -24,7 +24,6 @@ class UserPlaces extends React.Component {
   componentDidMount() {
     setTimeout(()=>{
       const id = this.props.user._id
-      console.log("id is....", id)
       this.props.getPlacesOfOneUser(id)
     },100)
     
@@ -73,7 +72,6 @@ class UserPlaces extends React.Component {
     )
   }
 } function mapStateToProps(state) {
-  console.log("state login", state.places)
   return {
     user: state.user.login,
     places: state.places.places

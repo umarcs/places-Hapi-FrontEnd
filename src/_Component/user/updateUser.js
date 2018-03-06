@@ -37,6 +37,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
   </div>
 )
 
+
 let UpdateUserForm = props => {
   const { error, handleSubmit, pristine, reset, submitting } = props
   console.log("edded", error)
@@ -71,7 +72,7 @@ let UpdateUserForm = props => {
             <div className="row">
               <div className="col-md-6">
                 <div className="col-md-2">
-                  <br /><button className="btn btn-success" type="submit" disabled={submitting}>Update </button>
+                  <br /><button className="btn btn-success" type="submit"disabled={pristine || submitting}>Update </button>
                 </div>
                 <div className="col-md-2">
                   <br /><button className="btn btn-danger" type="button" disabled={pristine || submitting} onClick={reset}> Clear Values </button>
