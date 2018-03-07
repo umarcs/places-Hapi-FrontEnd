@@ -1,8 +1,11 @@
 
 let initialState = {
     signup: [],
-    login: [],
-    update: []
+    login: null,
+    update: [],
+    loggedInUser: null,
+    loading: false,
+    error: null,
 }
 export default function (state = initialState, action) {
     switch (action.type) {

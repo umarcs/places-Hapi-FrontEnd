@@ -1,16 +1,16 @@
 import Request from 'superagent';
 import { SubmissionError } from 'redux-form'
 
-// // let apiBaseUrl = '/';
-// // if(process.env.NODE_ENV == 'production') {
-// //     apiBaseUrl = 'http://209.250.243.231:4000'
-// // } else {
-// //     apiBaseUrl = 'http://localhost:2000'
-// //}
 
- 
+let apiBaseUrl = '/';
+if(process.env.NODE_ENV == 'production') {
+    apiBaseUrl = 'http://209.250.243.231:4000'
+} else {
+    apiBaseUrl = 'http://localhost:2002'
+}
+
 export function signup(data){  
-    const url = "http://localhost:2002/api/user/signup";
+    const url = `${apiBaseUrl}/api/user/signup`;
     return  Request.post(url).send(data).then((Response=>{
         return{
             type : "SIGN-UP",
@@ -25,13 +25,13 @@ export function signup(data){
 }
 
 export function login(data){  
-    const url = "http://localhost:2002/api/user/login";
+    const url = `${apiBaseUrl}/api/user/login`;
     return  Request.post(url).send(data).then((Response=>{
         localStorage.setItem("token",Response.body.token);
 
         return{
             type : "LOG-IN",
-            payload : Response.body
+            payload : Response.body // { data: {}, token: token}
         }
     }))
     .catch((err)=>{
@@ -48,7 +48,7 @@ export function update(data){
         lastName: data.lastName,
     }
     console.log("data ,", data)
-    const url = `http://localhost:2002/api/user/${id}`
+    const url = `${apiBaseUrl}/api/user/${id}`
     return Request.put(url).set({'Content-Type': 'application/json', 'Authorization': 'Bearer' + token })
     .send(updatedData).then((Response=>{
         //localStorage.setItem('login', JSON.stringify(Response.body));
@@ -78,7 +78,7 @@ export function update(data){
 //----------get user data through token----------
 export function getUserDataByToken(){ 
     let token = localStorage.getItem('token')
-    const url = 'http://localhost:2002/api/user';
+    const url = `${apiBaseUrl}/api/user`;
      return  Request.get(url).set({'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token})
      .then(response=>{
         console.log("data by token send ",response)

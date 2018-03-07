@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { addPlace } from '../../_Action/place';
+import queryString from 'query-string'
+
 //import submit from '../../container/user-form//updateUser';
 const validate = values => {
     const errors = {}
@@ -28,6 +30,7 @@ const validate = values => {
 
 
 
+
 const required = value => value ? undefined : 'Required';
 class UpdatePlace extends Component {
     constructor(props) {
@@ -36,6 +39,10 @@ class UpdatePlace extends Component {
         this.state = {
             selectCat: null,
         };
+    }
+    componentDidMount() {
+        const id = this.props.match.params.pId;
+       
     }
     handleChange(event) {
         this.setState({

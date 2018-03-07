@@ -45,7 +45,7 @@ class Places extends Component {
                             this.props.places.map((place, i) => {
                                 return <div className="col-lg-4 col-md-6 mb-4" key={i}>
                                     <div className="card h-100">
-                                        <a href="#"><img className="card-img-top" src="{place.logo}" alt /></a>
+                                        <a href="#"><img className="card-img-top" src="tahir.jpg" height="10" width="10" alt /></a>
                                         <div className="card-body">
                                             <h4 className="card-title">
                                                 <Link to={`/places/d/${place._id}`} >{place.title} </Link>

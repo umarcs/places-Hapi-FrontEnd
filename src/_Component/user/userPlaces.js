@@ -17,16 +17,16 @@ class UserPlaces extends React.Component {
 
 
   }
-  placeId(id){
+  placeId(id) {
     alert(id)
   }
 
   componentDidMount() {
-    setTimeout(()=>{
+    setTimeout(() => {
       const id = this.props.user._id
       this.props.getPlacesOfOneUser(id)
-    },100)
-    
+    }, 100)
+
   }
   render() {
     return (
@@ -50,17 +50,16 @@ class UserPlaces extends React.Component {
                 </thead>
                 <tbody>
                   {
-                    this.props.places.map((data,id)=>{
-                      return <tr>
+                    this.props.places.map((data, i) => {
+                      return <tr key={i}>
                         <td>{data.title}</td>
                         <td>{data.description}</td>
                         <td>{data.address}</td>
-                        <p data-placement="top" data-toggle="tooltip" title="Edit"><button  onClick={()=>{this.placeId(data._id)}} className="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit">EDIT<span className="glyphicon glyphicon-pencil"></span></button></p>
-
-
-                        </tr>
+                        <p data-placement="top" data-toggle="tooltip" title="Edit"> <Link className="btn btn-primary btn-xs" data-title="Edit" to={`/Myplaces/update-place/id/${data._id}` }>Edit</Link><span className="glyphicon glyphicon-pencil"></span></p>
+                       
+                      </tr>
                     })
-                    
+
                   }
                 </tbody>
               </table>

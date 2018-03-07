@@ -37,12 +37,12 @@ class Dashboard extends React.Component {
 
         <div className="content-wrapper">
           <div className="container-fluid">
-            <ol className="breadcrumb">
-              <li className="breadcrumb-item">
-                <a href="#">Dashboard</a>
-              </li>
-              <li className="breadcrumb-item active">My Dashboard</li>
-            </ol>
+              <ol className="breadcrumb">
+                <li className="breadcrumb-item">
+                  
+                </li>
+                <li className="breadcrumb-item active"></li>
+              </ol>
 
             {this.props.children}
  

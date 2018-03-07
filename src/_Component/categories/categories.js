@@ -20,11 +20,7 @@ var divStyle = {
 class Home extends Component {
     render() {
         return (
-
-
-
             <div className="col-lg-8">
-
                 <div className="row">
                     {
                         this.props.categories
@@ -32,7 +28,7 @@ class Home extends Component {
                             this.props.categories.map((category, i) => {
                                 return <div className="col-lg-4 col-md-6 mb-4" key={i}>
                                     <div className="card h-100">
-                                        <a href="#"><img className="card-img-top" src="http://placehold.it/700x400" alt /></a>
+                                        <a href="#"><img className="card-img-top" src="" alt="not found" /></a>
                                         <div className="card-body">
                                             <h4 className="card-title">
                                                 <Link to={`/places?c=${category._id}`}>
@@ -50,25 +46,13 @@ class Home extends Component {
                                 </div>
                             })
                             :
-                            "Categories Not Found"
-                            
+                            "Categories Not Found"                           
                     }
-
-
-                    {this.props.children}
-
-
-
                 </div>
             </div>
-
-
         )
     }
 }
-
-
-
 function mapStateToProps(state) {
     console.log("state is here", state)
     return {

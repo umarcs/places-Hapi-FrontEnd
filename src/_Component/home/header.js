@@ -30,23 +30,16 @@ class View extends Component {
         };
 
     }
-
-
     componentDidMount() {
+       // alert("o")
         this.props.getCategories()
     }
-
     handleChange(event) {
-
         console.log(event.target.name, event.target.value)
-
-
         this.setState({
             [event.target.name]: event.target.value
         })
-
     }
-
     searchPlaces() {
         const { selectCat: c, inputVal: q } = this.state;
         let query = {};
@@ -60,12 +53,10 @@ class View extends Component {
         console.log("query is: ", query)
         this.props.getPlaces(query)
     }
-
     render() {
         console.log("this.props: ", this.state)
         return (
-
-            <div>
+         <div>
                 {/* Navigation */}
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
                     <div className="container">
@@ -73,7 +64,7 @@ class View extends Component {
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon" />
                         </button>
-                        <div className="collapse navbar-collapse" id="navbarResponsive">
+                        <div className="" id="navbarResponsive">
 
                             <ul className="navbar-nav ml-auto">
                                 <div className="dropdown">
@@ -115,19 +106,12 @@ class View extends Component {
                         </div>
                     </div>
                 </nav>
-
-
                 <Signup />
                 <Login />
             </div>
-
-
         )
     }
 }
-
-
-
 function mapStateToProps(state) {
     console.log("state is here", state)
     return {

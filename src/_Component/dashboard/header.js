@@ -16,10 +16,13 @@ class Header extends React.Component {
     constructor() {
         super();
         this.logOut = this.logOut.bind(this)
-        //     this.updateUser = this.updateUser.bind(this)
     }
     logOut() {
-        this.props.Logout()
+       this.props.Logout()
+      setTimeout(()=>{
+        window.location.reload()
+    },1000)
+    
     }
     // updateUser(data){
     //   this.props.update(data)
@@ -28,19 +31,19 @@ class Header extends React.Component {
         return (
             <div>
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-                    <a className="navbar-brand" href="index.html">PK PLaces</a>
+                    <Link className="navbar-brand" to="/">PK PLaces</Link>
                     <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon" />
                     </button>
                     <div className="collapse navbar-collapse" id="navbarResponsive">
                         <ul className="navbar-nav navbar-sidenav" id="exampleAccordion">
                             <li className="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                                <Link className="nav-link fa fa-fw fa-dashboard" to="/dashboard">
-                                    <span className="nav-link-text">Dashboard</span>
+                                <Link className="nav-link fa fa-fw fa-dashboard" to="/profile">
+                                    <span className="nav-link-text">Profile</span>
                                 </Link>
                             </li>
                             <li className="nav-item" data-toggle="tooltip" data-placement="right" title="update profile">
-                                <Link className="nav-link fa fa-fw fa-dashboard" to="/dashboard/updateUser">
+                                <Link className="nav-link fa fa-fw fa-dashboard" to="/profile/update-profile">
                                     <span className="nav-link-text">Update&nbsp;Profile</span>
                                 </Link>
                             </li>
@@ -65,14 +68,12 @@ class Header extends React.Component {
                                 </a>
                                 <ul className="sidenav-second-level collapse" id="collapseComponents">
                                     <li>
-                                        <Link to="/dashboard/userPlaces">My PLaces</Link>
+                                        <Link to="/Myplaces">My PLaces</Link>
                                     </li>
                                     <li>
-                                        <Link to="/dashboard/addPlace">Add Place</Link>
+                                        <Link to="/Myplaces/add-place">Add Place</Link>
                                     </li>
-                                    <li>
-                                        <Link to="/dashboard/updatePlace">Update Place</Link>
-                                    </li>
+                                   
                                 </ul>
                             </li>
                           

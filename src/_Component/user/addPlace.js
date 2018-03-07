@@ -53,7 +53,7 @@ class AddPlace extends Component {
 
 
         return (
-            <div className="container  ">
+            <div className="container ">
                 <div className="card bg-faded card-block ">
                     <h2>Add Place</h2>
                 </div>
@@ -118,7 +118,7 @@ class AddPlace extends Component {
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="col-md-4">
-                                        <button primary={true} className="btn btn-success" type="submit" disabled={submitting}>Add Place </button>
+                                        <button className="btn btn-success" type="submit" disabled={submitting}>Add Place </button>
                                     </div>
                                     <div className="col-md-4">
                                         <button className="btn btn-danger" type="button" disabled={pristine || submitting} onClick={reset}> Clear Values </button>

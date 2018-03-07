@@ -10,8 +10,15 @@ class Login extends Component {
             super();
             this.loginFunc = this.loginFunc.bind(this)
         }
+
+        componentWillReceiveProps(nextProps) {
+            if(nextProps.user.login) {
+                window.location.reload()
+            }
+        }
+
         loginFunc(vals) {
-            return this.props.login(vals)
+           return this.props.login(vals)
         }
         render() {
             return (
@@ -21,7 +28,15 @@ class Login extends Component {
             )
         }
 }
+
+function mapStateToProps(state) {
+    return {
+        user: state.user,
+    };
+}
+
 function mapDispathToProps(dispatch) {
     return bindActionCreators({ login }, dispatch)
 }
-export default connect(null,mapDispathToProps)(Login)
+
+export default connect(mapStateToProps, mapDispathToProps)(Login)
