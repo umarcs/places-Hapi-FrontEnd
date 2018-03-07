@@ -13,7 +13,7 @@ import addPlace from './_Component/user/addPlace'
 import userPlaces from './_Component/user/userPlaces'
 import updateUser from './_Container/user/updateUser';
 import updatePlace from './_Component/user/updatePlace';
-import dashboard from './_Component/user/profile';
+import profile from './_Component/user/profile';
 import placeDetail from './_Component/places/details'
 import places from './_Component/places/places';
 import categories from './_Component/categories/categories'
@@ -23,7 +23,7 @@ class App extends Component {
     if (localStorage.token) {
       this.props.getUserDataByToken(); ``
       this.props.getCategories();
-      <Redirect to='/dashboard' from='/' />
+     
 
     }
   }
@@ -38,15 +38,16 @@ class App extends Component {
               (localStorage.getItem("token"))
                 ?
                 <UserDashboard>
-                  {/* <Redirect to='/dashboard'  /> */}
-                  <Route exact path="/dashboard/addPlace" component={addPlace} />
-                  <Route exact path="/dashboard/userPlaces" component={userPlaces} />
-                  <Route exact path="/dashboard/updateUser" component={updateUser} />
-                  <Route exact path="/dashboard/updatePlace" component={updatePlace} />
-                  <Route exact path="/dashboard" component={dashboard} />
+                  <Redirect exact to='/profile'from='/' component={profile} />
+                  {/* <Route exact path="/profile" component={profile} /> */}                  
+                  <Route exact path="/profile/updateUser" component={updateUser} />
+                  <Route exact path="/user-places" component={userPlaces} />
+                  <Route exact path="/user-places/addPlace" component={addPlace} />
+                  <Route exact path="/user-places/updatePlace" component={updatePlace} />
+                  
                 </UserDashboard>
                 :
-                <Redirect to="/" from='/dashboard' />
+                <Redirect to="/" from='/profile' />
 
             }
             <Home>
