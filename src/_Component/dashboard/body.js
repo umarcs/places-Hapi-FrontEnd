@@ -37,24 +37,14 @@ class Dashboard extends React.Component {
 
         <div className="content-wrapper">
           <div className="container-fluid">
-            <ol className="breadcrumb">
-              <li className="breadcrumb-item">
-                <a href="#">Dashboard</a>
-              </li>
-              <li className="breadcrumb-item active">My Dashboard</li>
-            </ol>
+           
 
-            {this.props.children}
- 
-            {/* { (baseUrl.indexOf('/admin') >= 0) ? <leftSideBar /> : "" } */}
-
-      
+            {this.props.children}      
           </div>
-          <Footer />
-          <a className="scroll-to-top rounded" href="#page-top">
-            <i className="fa fa-angle-up" />
-          </a>
+         
+          
         </div>
+        <Footer />
       </div>
     )
   }

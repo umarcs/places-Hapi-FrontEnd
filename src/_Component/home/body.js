@@ -25,48 +25,6 @@ var divStyle = {
     marginTop: "70px"
 }
 class Home extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.searchPlaces = this.searchPlaces.bind(this)
-    //     this.handleChange = this.handleChange.bind(this);
-
-    //     this.state = {
-    //         selectCat: null,
-    //         inputVal: ''
-    //     };
-
-    // }
-
-
-    // componentDidMount() {
-    //     this.props.getCategories()
-    // }
-
-    // handleChange(event) {
-
-    //     console.log(event.target.name, event.target.value)
-
-
-    //     this.setState({
-    //         [event.target.name]: event.target.value
-    //     })
-
-    // }
-
-    // searchPlaces() {
-    //     const { selectCat: c, inputVal: q } = this.state;
-    //     let query = {};
-    //     if (c) {
-    //         query.c = c
-    //     }
-    //     if (q) {
-    //         query.q = q
-    //     }
-
-    //     console.log("query is: ", query)
-    //     this.props.getPlaces(query)
-    // }
-
     render() {
         return (
 

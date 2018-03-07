@@ -38,8 +38,8 @@ class App extends Component {
               (localStorage.getItem("token"))
                 ?
                 <UserDashboard>
-                  <Redirect exact to='/profile'from='/' component={profile} />
-                  {/* <Route exact path="/profile" component={profile} /> */}                  
+                  <Redirect exact to='/profile' from='/'  />
+                  <Route exact path="/profile" component={profile} />                  
                   <Route exact path="/profile/updateUser" component={updateUser} />
                   <Route exact path="/user-places" component={userPlaces} />
                   <Route exact path="/user-places/addPlace" component={addPlace} />
@@ -47,8 +47,9 @@ class App extends Component {
                   
                 </UserDashboard>
                 :
+                
                 <Redirect to="/" from='/profile' />
-
+                
             }
             <Home>
             <Route exact path="/" component={categories} />

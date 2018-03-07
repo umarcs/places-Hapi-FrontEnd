@@ -36,7 +36,8 @@ export default function (state = initialState, action) {
 
             case 'LOG_OUT':
             return {
-                initialState
+                ...state,
+                login: null
             };
             break;
     }

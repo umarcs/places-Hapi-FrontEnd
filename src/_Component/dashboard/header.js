@@ -21,6 +21,13 @@ class Header extends React.Component {
     logOut() {
         this.props.Logout()
     }
+
+    componentWillReceiveProps(nextProps) {
+        if(!nextProps.user.login) {
+            window.location.reload();
+        }
+    }
+
     // updateUser(data){
     //   this.props.update(data)
     // }
@@ -207,7 +214,15 @@ class Header extends React.Component {
         )
     }
 };
+
+function mapStateToProps(state) {
+    return {
+        user: state.user
+    }
+}
+
 function mapDispathToProps(dispatch) {
     return bindActionCreators({ Logout }, dispatch)
 }
-export default connect(null, mapDispathToProps)(Header)
+
+export default connect(mapStateToProps, mapDispathToProps)(Header)
