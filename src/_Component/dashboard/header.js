@@ -23,8 +23,9 @@ class Header extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(!nextProps.user.login) {
-            window.location.reload();
+        if(this.props.user.login && !nextProps.user.login) {
+            console.log('gonit to refresh')
+            // window.location.reload();
         }
     }
 

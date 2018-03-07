@@ -79,7 +79,7 @@ export function update(data){
 //----------get user data through token----------
 export function getUserDataByToken(){ 
     let token = localStorage.getItem('token')
-    const url = '${apiBaseUrl}/user';
+    const url = `${apiBaseUrl}/user`;
      return  Request.get(url).set({'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token})
      .then(response=>{
         console.log("data by token send ",response)
@@ -97,6 +97,7 @@ export function getUserDataByToken(){
 
 export function Logout(){
     localStorage.clear();
+    window.location.href = '/';
     return{
         type: "LOG_OUT"
     }
