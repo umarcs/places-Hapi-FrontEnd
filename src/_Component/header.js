@@ -11,7 +11,7 @@ import { getCategories } from '../_Action/category'
 import { getPlaces } from '../_Action/place';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
 import PlaceForm from '../_Container/user/addPlace';
-
+import Map from './googleMap/map'
 const div = style({
     marginTop: '60px',
 })
@@ -64,61 +64,7 @@ class View extends Component {
     render() {
         console.log("this.props: ", this.state)
         return (
-            // <div>
-            //     <div>
-            //         <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
-            //             <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            //                 <span className="navbar-toggler-icon"></span>
-            //             </button>
-            //             <a className="navbar-brand" href="http://www.google.com">PLACES LOGO</a>
-
-            //             <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            //                 <ul className="navbar-nav mr-auto">
-            //                 </ul>
-            // <div className="dropdown">
-            //     <select name="selectCat" onClick={this.searchPlaces} value={this.state.selectCat} onChange={this.handleChange} >
-            //         <option />
-            //         {
-            //             this.props.categories.map((data, id) => {
-            //                 return <option value={data._id} key={id}>{data.title}</option>
-            //             })
-            //         }
-            //     </select>
-
-
-            // </div>
-
-            // <div className={marginSearchBarNav}>
-            //     <label>
-            //         <input type="text" name="inputVal" value={this.state.inputVal} onChange={this.handleChange} />
-            //     </label>
-            //     <input type="button" value="Search" onClick={this.searchPlaces} />
-            //     {/* </form> */}
-
-            // </div>
-            //                 <div>
-            //                     <ul className="navbar-nav mr-auto">
-            //                         <li className="nav-item active">
-            //                             <button className="btn btn-outline-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Signup</button>
-            //                         </li>
-            //                         <li className="nav-item active">
-            //                             <button type="button" className="btn btn-outline-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Login</button>
-            //                         </li>
-
-
-            //                     </ul>
-            //                 </div>
-
-            //             </div>
-            //         </nav>
-            //     </div>
-            //     <div classNameName="modal-body">
-
-            //     </div>
-
-            //     <Signup />
-            //     <Login />
-            // </div>
+        
             <div>
                 {/* Navigation */}
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -172,8 +118,13 @@ class View extends Component {
                     <div className="row">
                         <div className="col-lg-4">
                             <div className="list-group">
-                                <h1>google map</h1>
-                                <h2>google maps end</h2>
+                                <Map
+                                    zoom={16}
+                                    center={{  lat: 30.231078, lng: 71.456956   }}
+                                    containerElement={<div style={{ height: `400px` }} />}
+                                    mapElement={<div style={{ height: `100%` }} />}
+
+                                />
                             </div>
                         </div>
                         {/* /.col-lg-3 */}
@@ -201,7 +152,7 @@ class View extends Component {
                                                 </div>
                                             </div>
                                         })
-                                        
+
                                         :
                                         this.props.categories.map((data, id) => {
                                             return <div className="col-lg-4 col-md-6 mb-4" key={id}>
@@ -222,9 +173,9 @@ class View extends Component {
                                                     </div>
                                                 </div>
                                             </div>
-                                        })  
-                                      
-                                           
+                                        })
+
+
 
                                 }
 
@@ -329,7 +280,7 @@ class View extends Component {
                 </div>
                 {/* /.container */}
                 {/* Footer */}
-               
+
                 <Signup />
                 <Login />
             </div>
