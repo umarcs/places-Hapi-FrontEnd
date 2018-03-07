@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Home from './_Container/home';
+import Home from './_Component/home/body';
 import { BrowserRouter, Route, Link, NavLink, Switch, Redirect, Prompt } from 'react-router-dom';
 import { NestedRoute, SubRoute } from 'react-nested-route'
 
@@ -14,11 +14,14 @@ import userPlaces from './_Component/user/userPlaces'
 import updateUser from './_Container/user/updateUser';
 import updatePlace from './_Component/user/updatePlace';
 import dashboard from './_Component/user/profile';
+import placeDetail from './_Component/places/details'
+import places from './_Component/places/places';
+import categories from './_Component/categories/categories'
 
 class App extends Component {
   componentDidMount() {
     if (localStorage.token) {
-      this.props.getUserDataByToken();``
+      this.props.getUserDataByToken(); ``
       this.props.getCategories();
       <Redirect to='/dashboard' from='/' />
 
@@ -40,28 +43,17 @@ class App extends Component {
                   <Route exact path="/dashboard/userPlaces" component={userPlaces} />
                   <Route exact path="/dashboard/updateUser" component={updateUser} />
                   <Route exact path="/dashboard/updatePlace" component={updatePlace} />
-                  <Route exact path="/dashboard" component={dashboard} />     
+                  <Route exact path="/dashboard" component={dashboard} />
                 </UserDashboard>
-              :
-                <Redirect  to="/" from='/dashboard' />
+                :
+                <Redirect to="/" from='/dashboard' />
 
             }
-             <Route exact path="/" component={Home} />
-
-
-
-
-            {/* <Route path='*' render={() =>
-                <p>
-                  <div className="card bg-faded card-block">
-                    <div className="row">
-                      <h1>Not Found</h1>
-                    </div>
-                  </div>
-                </p>}
-              /> */}
-
-
+            <Home>
+            <Route exact path="/" component={categories} />
+              <Route exact path="/places" component={places} />
+              <Route exact path="/places/d/:pId" component={placeDetail} />
+            </Home>
           </Switch>
         </div>
       </BrowserRouter>

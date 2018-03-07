@@ -1,6 +1,7 @@
 
 let initialState = {
-    places: []
+    places: [],
+    place: {}
 }
 export default function (state = initialState, action) {
     console.log("palceeeee", action.type)
@@ -21,6 +22,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 places: action.payload
+            };
+            break;
+        case "GET_PLACE":
+            return {
+                ...state,
+                place: action.payload
             };
             break;
     }

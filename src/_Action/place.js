@@ -24,7 +24,7 @@ export function getPlaces(query) {
 
     const url = `http://localhost:2002/api/places?${queryParam}`;
     return Request.get(url).then((response => {
-        console.log('response: ', response)
+        // console.log('response: ', response)
         return {
             type: "GET_PLACES",
             payload: response.body.places
@@ -36,7 +36,7 @@ export function getPlacesOfOneUser(id) {
   
     const url = `http://localhost:2002/api/places/userId/${id}`;
     return Request.get(url).then((response => {
-        console.log('response: ', response)
+        // console.log('response: ', response)
         return {
             type: "GET_PLACES_OF_ONE_USER",
             payload: response.body.place
@@ -44,11 +44,22 @@ export function getPlacesOfOneUser(id) {
     }))
 }
 
+export function getPlace(id) {
+  
+    const url = `http://localhost:2002/api/places/${id}`;
+    return Request.get(url).then((response => {
+        console.log('response: ', response)
+        return {
+            type: "GET_PLACE",
+            payload: response.body.place
+        }
+    }))
+}
 export function addPlace(place) {
     let token= localStorage.getItem("token")
     const url = 'http://localhost:2002/api/places';
     return Request.post(url).send(place).set({'Content-Type': 'application/json', 'Authorization': 'Bearer' + token }).then((response => {
-        console.log('response: ', response.body)
+        // console.log('response: ', response.body)
         return {
             type: "ADD_PLACE",
             payload: response.body.places
