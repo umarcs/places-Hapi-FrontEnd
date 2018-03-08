@@ -17,25 +17,30 @@ class UserPlaces extends React.Component {
 
 
   }
-  placeId(id){
+  placeId(id) {
     alert(id)
   }
 
   componentDidMount() {
-    setTimeout(()=>{
+    setTimeout(() => {
       const id = this.props.user._id
       this.props.getPlacesOfOneUser(id)
-    },100)
-    
+    }, 100)
+
   }
   render() {
     return (
-      <div className="container">
-        <div className="row">
 
+                       
+      <div className="container containerWidth">
+        <div className="row">
+        <div className="modal-body">
+
+          <div className="card bg-faded card-block">
+            <h3>User Places</h3>
+          </div>
 
           <div className="col-md-12">
-            <h1 className="well">User Places</h1>
             <div className="table-responsive">
 
               <table id="mytable" className="table table-bordred table-striped">
@@ -50,23 +55,25 @@ class UserPlaces extends React.Component {
                 </thead>
                 <tbody>
                   {
-                    this.props.places.map((data,id)=>{
-                      return <tr>
+                    this.props.places.map((data, i) => {
+                      return <tr key={i}>
                         <td>{data.title}</td>
                         <td>{data.description}</td>
                         <td>{data.address}</td>
-                        <p data-placement="top" data-toggle="tooltip" title="Edit"><button  onClick={()=>{this.placeId(data._id)}} className="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit">EDIT<span className="glyphicon glyphicon-pencil"></span></button></p>
+                        <p data-placement="top" data-toggle="tooltip" title="Edit"><Link to={`/places/update-place/${data._id}`} className="btn btn-primary btn-xs">EDIT<span className="glyphicon glyphicon-pencil"></span></Link></p>
 
 
-                        </tr>
+
+                      </tr>
                     })
-                    
+
                   }
                 </tbody>
               </table>
             </div>
 
           </div>
+        </div>
         </div>
       </div>
     )

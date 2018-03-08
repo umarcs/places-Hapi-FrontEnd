@@ -77,7 +77,7 @@ class View extends Component {
 
                             <ul className="navbar-nav ml-auto">
                                 <div className="dropdown">
-                                <Link to={`/places?c=${this.state.selectCat}`}>
+                                <Link to={`/places-list?c=${this.state.selectCat}`}>
                                     <select className="btn btn-secondary dropdown-toggle" name="selectCat" onClick={this.searchPlaces} value={this.state.selectCat} onChange={this.handleChange} >
                                         <option>Select Categories</option>
                                         {
@@ -129,7 +129,7 @@ class View extends Component {
 
 
 function mapStateToProps(state) {
-    console.log("state is here", state)
+    // console.log("state is here", state)
     return {
         categories: state.category.categories,
         places: state.places.places

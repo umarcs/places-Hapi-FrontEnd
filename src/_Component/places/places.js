@@ -29,8 +29,8 @@ class Places extends Component {
         const rawURL = this.props.location.search;
         const params = queryString.parse(rawURL);
         
-        console.log('componentDidMount Places>>>>>>>>>>>>>>>>>>>>>>>>>', params)
-        console.log(rawURL);
+        // console.log('componentDidMount Places>>>>>>>>>>>>>>>>>>>>>>>>>', rawURL)
+        // console.log(rawURL);
         this.props.getPlaces(params)
     }
     
@@ -78,7 +78,7 @@ class Places extends Component {
 
 
 function mapStateToProps(state) {
-    console.log("state is here", state)
+    // console.log("state is here", state)
     return {
         categories: state.category.categories,
         places: state.places.places

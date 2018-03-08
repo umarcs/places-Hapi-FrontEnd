@@ -103,12 +103,9 @@ const signUp = props => {
                                                 <div className="col-md-1">
                                                     <button className="btn btn-success" type="submit" disabled={submitting}>Sign Up</button>
                                                     
-                                                </div>&nbsp;&nbsp;&nbsp;
+                                                </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                     <div className="col-md-1">
                                                     <button className="btn btn-secondary" type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
-                                                </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                     <div className="col-md-1">
-                                                    {/* <FlatButton><Link to="/dashboard">Back</Link></FlatButton> */}
                                                 </div>
                                             </div>
                                         </form>

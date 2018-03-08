@@ -35,7 +35,7 @@ export function getPlaces(query) {
 }
 //get all places of one user
 export function getPlacesOfOneUser(id) {
-  
+
     const url = `${apiBaseUrl}/places/userId/${id}`;
     return Request.get(url).then((response => {
         // console.log('response: ', response)
@@ -47,7 +47,7 @@ export function getPlacesOfOneUser(id) {
 }
 
 export function getPlace(id) {
-  
+
     const url = `${apiBaseUrl}/places/${id}`;
     return Request.get(url).then((response => {
         console.log('response: ', response)
@@ -58,9 +58,9 @@ export function getPlace(id) {
     }))
 }
 export function addPlace(place) {
-    let token= localStorage.getItem("token")
+    let token = localStorage.getItem("token")
     const url = `${apiBaseUrl}/places`;
-    return Request.post(url).send(place).set({'Content-Type': 'application/json', 'Authorization': 'Bearer' + token }).then((response => {
+    return Request.post(url).send(place).set({ 'Content-Type': 'application/json', 'Authorization': 'Bearer' + token }).then((response => {
         // console.log('response: ', response.body)
         return {
             type: "ADD_PLACE",
@@ -69,6 +69,32 @@ export function addPlace(place) {
     }))
 }
 
+export function updatePlace(place) {
+    let token = localStorage.getItem("token")
+    const id = place._id
+    const updatedData = {
+        title: place.title,
+        address: place.address,
+        images: place.images,
+        description: place.description,
+        logo: place.logo,
+        category : place.category
+    }
+    console.log("data of place>>", updatedData)
+    const url = `${apiBaseUrl}/places/${id}`
+    return Request.put(url).set({ 'Content-Type': 'application/json', 'Authorization': 'Bearer' + token })
+        .send(updatedData).then((Response => {
+            //localStorage.setItem('login', JSON.stringify(Response.body));
+            console.log("data is here $$$$:", Response)
+            //return Response;
+            return {
+                type: "UPDATE_PLACE",
+                payload: Response.body.place
+            }
+
+        }))
+
+}
 
 
 

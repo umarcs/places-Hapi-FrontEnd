@@ -69,7 +69,7 @@ class Home extends Component {
 
 
 function mapStateToProps(state) {
-    console.log("state is here", state)
+    // console.log("state is here", state)
     return {
         categories: state.category.categories,
         places: state.places.places

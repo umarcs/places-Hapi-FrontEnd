@@ -15,7 +15,7 @@ import updateUser from './_Container/user/updateUser';
 import updatePlace from './_Component/user/updatePlace';
 import profile from './_Component/user/profile';
 import placeDetail from './_Component/places/details'
-import places from './_Component/places/places';
+import placesList from './_Component/places/places';
 import categories from './_Component/categories/categories'
 
 class App extends Component {
@@ -38,22 +38,22 @@ class App extends Component {
               (localStorage.getItem("token"))
                 ?
                 <UserDashboard>
-                  <Redirect exact to='/profile' from='/'  />
+                  {/* <Redirect exact to='/profile' from='/'  /> */}
                   <Route exact path="/profile" component={profile} />                  
-                  <Route exact path="/profile/updateUser" component={updateUser} />
-                  <Route exact path="/user-places" component={userPlaces} />
-                  <Route exact path="/user-places/addPlace" component={addPlace} />
-                  <Route exact path="/user-places/updatePlace" component={updatePlace} />
+                  <Route exact path="/profile/update-profile" component={updateUser} />
+                  <Route exact path="/places" component={userPlaces} />
+                  <Route exact path="/places/add-place" component={addPlace} />
+                  <Route exact path="/places/update-place/:pId" component={updatePlace} />
                   
                 </UserDashboard>
                 :
-                
-                <Redirect to="/" from='/profile' />
+                  ''
+                //  <Redirect to="/"  />
                 
             }
             <Home>
             <Route exact path="/" component={categories} />
-              <Route exact path="/places" component={places} />
+              <Route exact path="/places-list" component={placesList} />
               <Route exact path="/places/d/:pId" component={placeDetail} />
             </Home>
           </Switch>

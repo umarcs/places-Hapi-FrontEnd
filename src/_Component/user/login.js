@@ -34,7 +34,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 
 const LoginForm = (props) => {
     const { error, handleSubmit, pristine, reset, submitting } = props
-    console.log("gg", handleSubmit, submitting)
+    //console.log("gg", handleSubmit, submitting)
     return (
         <div>
             <div className="modal fade bd-example-modal-sm" tabIndex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -57,7 +57,7 @@ const LoginForm = (props) => {
                                                         {error && <strong className={errors}>{error}</strong>}
                                                         <div>
                                                             <FlatButton primary={true} type="submit" disabled={submitting}>Login</FlatButton>
-                                                            
+                                                                
                                                             <FlatButton type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</FlatButton>
                                                             {/* 
                                                             <FlatButton>

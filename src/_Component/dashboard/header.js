@@ -36,7 +36,7 @@ class Header extends React.Component {
         return (
             <div>
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-                    <a className="navbar-brand" href="index.html">PK PLaces</a>
+                    <a className="navbar-brand" href="/">PK PLaces</a>
                     <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon" />
                     </button>
@@ -47,11 +47,11 @@ class Header extends React.Component {
                                     <span className="nav-link-text">Profile</span>
                                 </Link>
                             </li>
-                            <li className="nav-item" data-toggle="tooltip" data-placement="right" title="update profile">
-                                <Link className="nav-link fa fa-fw fa-dashboard" to="/profile/updateUser">
+                            {/* <li className="nav-item" data-toggle="tooltip" data-placement="right" title="update profile">
+                                <Link className="nav-link fa fa-fw fa-dashboard" to="/profile/update-profile">
                                     <span className="nav-link-text">Update&nbsp;Profile</span>
                                 </Link>
-                            </li>
+                            </li> */}
                             <li className="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
                                 {/* <a className="nav-link" href="charts.html">
                                     <i className="fa fa-fw fa-area-chart" />
@@ -73,14 +73,12 @@ class Header extends React.Component {
                                 </a>
                                 <ul className="sidenav-second-level collapse" id="collapseComponents">
                                     <li>
-                                        <Link to="/user-places">My PLaces</Link>
+                                        <Link to="/places">My PLaces</Link>
                                     </li>
                                     <li>
-                                        <Link to="/user-places/addPlace">Add Place</Link>
+                                        <Link to="/places/add-place">Add Place</Link>
                                     </li>
-                                    <li>
-                                        <Link to="/user-places/updatePlace">Update Place</Link>
-                                    </li>
+                                    }
                                 </ul>
                             </li>
                           

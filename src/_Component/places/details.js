@@ -14,7 +14,7 @@ class Place_Detail extends Component {
     }
 
     componentDidMount() {
-        console.log('PLACE MOUNTED:::: >>> ', this.props)
+        // console.log('PLACE MOUNTED:::: >>> ', this.props)
         const { params } = this.props.match;
         
         // console.log('componentDidMount Places>>>>>>>>>>>>>>>>>>>>>>>>>', params)
@@ -35,7 +35,7 @@ class Place_Detail extends Component {
                     <div className="col-md-6">
                         <h3>{this.props.place.title}</h3>
                         <p>{this.props.place.description}</p>
-                        <a className="btn btn-primary" href="#">View Location</a>
+                        <a className="btn btn-primary" href="">View Location</a>
                     </div>
 
                 </div>
