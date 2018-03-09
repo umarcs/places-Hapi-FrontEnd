@@ -9,7 +9,7 @@ import FlatButton from 'material-ui/FlatButton';
 
 //import submit from '../../container/user-form//updateUser';
 const errorColor = {
-    color : "red"
+    color: "red"
 }
 const validate = values => {
     const errors = {}
@@ -74,14 +74,13 @@ class UpdatePlace extends Component {
                             </div>
                             <br />
                             <div className="card bg-faded card-block">
-                                <form onSubmit={handleSubmit}>
+                                <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                                     <div className="row">
                                         <div className="col-md-6">
                                             <div className="dropdown">
 
                                                 <Field className="btn btn-default" name="category._id" component="select" onChange={this.handleChange}>
 
-                                                    <option value=" ">Choose Category</option>
                                                     {
                                                         this.props.categories.map((data, id) => {
                                                             return <option value={data._id} key={id}>{data.title}</option>
@@ -168,7 +167,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
         <br /> <label>{label}</label>
         <div>
             <input {...input} className="form-control" placeholder={label} type={type} />
-            {touched && error &&  <span style={errorColor}>{error}</span>}
+            {touched && error && <span style={errorColor}>{error}</span>}
         </div>
     </div>
 )
