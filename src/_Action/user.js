@@ -1,7 +1,8 @@
 import Request from 'superagent';
 import { SubmissionError } from 'redux-form'
+let apiBaseUrl = 'http://localhost:2002/api';
 
-let apiBaseUrl = 'http://209.250.243.231:2002/api';
+//let apiBaseUrl = 'http://209.250.243.231:2002/api';
 // console.log('process.env: ', process.env)
 // if(process.env.NODE_ENV == 'production') {
 //     apiBaseUrl = 'http://209.250.243.231:4000'
@@ -14,12 +15,11 @@ export function signup(data){
     const url = `${apiBaseUrl}/user/signup`;
     return  Request.post(url).send(data).then((Response=>{
         return{
-            type : "SIGN-UP",
+            type : "SIGN_UP",
             payload : Response.body
         }
     }))
     .catch((err)=>{
-        console.log("errr", err)
         throw new SubmissionError({_error: 'Email Already Exist!' })
     })
     
@@ -31,7 +31,7 @@ export function login(data){
         localStorage.setItem("token",Response.body.token);
 
         return{
-            type : "LOG-IN",
+            type : "LOG_IN",
             payload : Response.body
         }
     }))

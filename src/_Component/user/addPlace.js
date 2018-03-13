@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from "redux";
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { addPlace } from '../../_Action/place';
@@ -9,7 +9,6 @@ import MenuItem from 'material-ui/MenuItem';
 import DropDownMenu from 'material-ui/DropDownMenu';
 
 
-//import submit from '../../container/user-form//updateUser';
 const errorColor = {
     color : "red"
 }
@@ -82,15 +81,6 @@ class AddPlace extends Component {
                                     }
                                 </DropDownMenu>
                                 <div className="dropdown">
-
-                                    {/* <select name="selectCat" value={this.state.selectCat} onChange={this.handleChange}>
-                                        <option >Choose Category</option>
-                                        {
-                                            this.props.categories.map((categories, id) => {
-                                                return <option value={data._id} key={id}>{data.title}</option>
-                                            })
-                                        }
-                                    </select> */}
                                 </div>
                                 <div className="row">
                                     <div className="col-md-6">
@@ -115,21 +105,23 @@ class AddPlace extends Component {
 
                                 </div>
                                 <br />
+                                <div className="col-md-9">
                                 <div className="row">
-                                    <div className="col-md-1">
+                                    <div className="col-md-2">
                                         <button primary={true} className="btn btn-success" type="submit" disabled={submitting}>Add Place </button>
 
-                                    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <div className="col-md-1">
+                                    </div>
+                                <div className="col-md-2">
                                         <button className="btn btn-danger" type="button" disabled={pristine || submitting} onClick={reset}>  Clear Values
                                          </button>
-                                    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <div className="col-md-1">
+                                    </div>
+                                <div className="col-md-3">
                                         <FlatButton>
                                             <Link to="/profile">Back to profile</Link>
                                         </FlatButton>
                                     </div>
                                 </div>
+                                    </div>
                             </form>
                         </div>
                     </div>

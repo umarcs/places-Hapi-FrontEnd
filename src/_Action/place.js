@@ -1,11 +1,13 @@
 import Request from 'superagent';
 const queryString = require('query-string');
+
 //var _ = require('lodash');
 
 // //import { SubmissionError } from 'redux-form'
 // //import config from '../config';
+let apiBaseUrl = 'http://localhost:2002/api';
 
-let apiBaseUrl = 'http://209.250.243.231:2002/api';
+//let apiBaseUrl = 'http://209.250.243.231:2002/api';
 
 // // let apiBaseUrl = '/';
 // // if(process.env.NODE_ENV == 'production') {
@@ -15,10 +17,6 @@ let apiBaseUrl = 'http://209.250.243.231:2002/api';
 // //}
 
 //get places
-/**
- * 
-//   * @param {*} query { c, q }
- */
 export function getPlaces(query) {
     console.log("query: ", query)
     const queryParam = queryString.stringify(query);
@@ -29,7 +27,7 @@ export function getPlaces(query) {
         // console.log('response: ', response)
         return {
             type: "GET_PLACES",
-            payload: response.body.places
+            payload: response.body.place
         }
     }))
 }
@@ -58,10 +56,17 @@ export function getPlace(id) {
     }))
 }
 export function addPlace(place) {
+    const addPlace = {
+        title: place.title,
+        address: place.address,
+        description: place.description,
+        logo: place.logo,
+        category : place.category,
+        user : place.user
+    }
     let token = localStorage.getItem("token")
     const url = `${apiBaseUrl}/places`;
-    return Request.post(url).send(place).set({ 'Content-Type': 'application/json', 'Authorization': 'Bearer' + token }).then((response => {
-        // console.log('response: ', response.body)
+    return Request.post(url).send(addPlace).set({ 'Content-Type': 'application/json', 'Authorization': 'Bearer' + token }).then((response => {
         return {
             type: "ADD_PLACE",
             payload: response.body.places

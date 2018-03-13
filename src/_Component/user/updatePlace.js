@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from "redux";
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
-import { getPlace, updatePlace } from '../../_Action/place';
+import React, {Component} from 'react';
+import {bindActionCreators} from "redux";
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {Field, reduxForm} from 'redux-form';
+import {getPlace, updatePlace} from '../../_Action/place';
 import queryString from 'query-string';
 import FlatButton from 'material-ui/FlatButton';
 
@@ -32,36 +32,40 @@ const validate = values => {
     return errors
 }
 
-
-
-const required = value => value ? undefined : 'Required';
+const required = value => value
+    ? undefined
+    : 'Required';
 class UpdatePlace extends Component {
     constructor(props) {
         super(props);
-        this.handleChange = this.handleChange.bind(this);
+        this.handleChange = this
+            .handleChange
+            .bind(this);
         this.state = {
-            selectCat: null,
+            selectCat: null
         };
     }
 
     componentDidMount() {
         // console.log('PLACE MOUNTED:::: >>> ', this.props)
-        const { params } = this.props.match;
+        const {params} = this.props.match;
 
-        this.props.getPlace(params.pId)
+        this
+            .props
+            .getPlace(params.pId)
     }
     handleChange(event) {
-        this.setState({
-            selectCat: event.target.value
-        })
+        this.setState({selectCat: event.target.value})
     }
     onSubmit(place) {
         place.category = this.state.selectCat
-        this.props.updatePlace(place)
+        this
+            .props
+            .updatePlace(place)
     }
 
     render() {
-        const { error, handleSubmit, pristine, reset, submitting } = this.props
+        const {error, handleSubmit, pristine, reset, submitting} = this.props
         // let selectCat = category._id;
 
         return (
@@ -72,83 +76,74 @@ class UpdatePlace extends Component {
                             <div className="card bg-faded card-block">
                                 <h3>Update Your Place</h3>
                             </div>
-                            <br />
+                            <br/>
                             <div className="card bg-faded card-block">
                                 <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                                     <div className="row">
                                         <div className="col-md-6">
                                             <div className="dropdown">
+                                                <Field
+                                                    className="btn btn-default"
+                                                    name="category._id"
+                                                    component="select"
+                                                    onChange={this.handleChange}>
 
-                                                <Field className="btn btn-default" name="category._id" component="select" onChange={this.handleChange}>
-
-                                                    {
-                                                        this.props.categories.map((data, id) => {
+                                                    {this
+                                                        .props
+                                                        .categories
+                                                        .map((data, id) => {
                                                             return <option value={data._id} key={id}>{data.title}</option>
                                                         })
                                                     }
                                                 </Field>
-
                                             </div>
-
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="col-md-6">
-                                            <Field
-                                                name="title"
-                                                type="text"
-                                                component={renderField}
-                                                label="Title"
-                                            />
+                                            <Field name="title" type="text" component={renderField} label="Title"/>
                                         </div>
                                         <div className="col-md-6">
-                                            <Field
-                                                name="address"
-                                                type="text"
-                                                component={renderField}
-                                                label="Address"
-                                            />
+                                            <Field name="address" type="text" component={renderField} label="Address"/>
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="col-md-6">
-                                            <Field
-                                                name="images"
-                                                type="text"
-                                                component={renderField}
-                                                label="Image"
-                                            />
+                                            <Field name="images" type="text" component={renderField} label="Image"/>
                                         </div>
                                         <div className="col-md-6">
                                             <Field
                                                 name="description"
                                                 type="text"
                                                 component={renderField}
-                                                label="Description"
-                                            />
+                                                label="Description"/>
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="col-md-6">
-                                            <Field
-                                                name="logo"
-                                                type="text"
-                                                component={renderField}
-                                                label="Logo"
-                                            />
+                                            <Field name="logo" type="text" component={renderField} label="Logo"/>
                                         </div>
                                     </div>
-
-                                    <br />
-                                    <div className="row">
-                                        <div className="col-md-1">
-                                            <button className="btn btn-success" type="submit" disabled={pristine || submitting}>Update</button>
-                                        </div>&nbsp;
-                                        <div className="col-md-1">
-                                            <button className="btn btn-danger" type="button" disabled={pristine || submitting} onClick={reset}> Clear Values </button>
-                                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                         <div className="col-md-1">
-                                            <FlatButton><Link to="/places">Back</Link></FlatButton>
+                                    <br/>
+                                    <div className="col-md-8">
+                                        <div className="row">
+                                            <div className="col-md-2">
+                                                <button className="btn btn-success" type="submit" disabled={submitting}>Update</button>
+                                            </div>
+                                            <div className="col-md-2">
+                                                <button
+                                                    className="btn btn-danger"
+                                                    type="button"
+                                                    disabled={pristine || submitting}
+                                                    onClick={reset}>
+                                                    Clear Values
+                                                </button>
+                                            </div>
+                                            <div className="col-md-2">
+                                                <FlatButton>
+                                                    <Link to="/places">Back to profile</Link>
+                                                </FlatButton>
+                                            </div>
                                         </div>
                                     </div>
                                 </form>
@@ -161,38 +156,33 @@ class UpdatePlace extends Component {
     };
 }
 
-
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
+const renderField = ({
+    input,
+    label,
+    type,
+    meta: {
+        touched,
+        error
+    }
+}) => (
     <div>
-        <br /> <label>{label}</label>
+        <br/>
+        <label>{label}</label>
         <div>
-            <input {...input} className="form-control" placeholder={label} type={type} />
-            {touched && error && <span style={errorColor}>{error}</span>}
+            <input {...input} className="form-control" placeholder={label} type={type}/> {touched && error && <span style={errorColor}>{error}</span>}
         </div>
     </div>
 )
 
 function mapStateToProps(state) {
     console.log("state is here>>>>", state.places.place)
-    return {
-        categories: state.category.categories,
-        place: state.places.place,
-        initialValues: state.places.place
-
-    };
+    return {categories: state.category.categories, place: state.places.place, initialValues: state.places.place};
 }
 function mapDispathToProps(dispatch) {
-    return bindActionCreators({ getPlace, updatePlace }, dispatch)
+    return bindActionCreators({
+        getPlace,
+        updatePlace
+    }, dispatch)
 }
-UpdatePlace = reduxForm({
-    form: "Update Place",
-    validate,
-    enableReinitialize: true
-
-})(UpdatePlace)
+UpdatePlace = reduxForm({form: "Update Place", validate, enableReinitialize: true})(UpdatePlace)
 export default connect(mapStateToProps, mapDispathToProps)(UpdatePlace);
-
-
-
-
-
