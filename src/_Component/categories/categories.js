@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import {style} from 'typestyle';
-import Signup from '../../_Container/user/signup';
-import Login from '../../_Container/user/login';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';

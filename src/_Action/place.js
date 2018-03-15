@@ -45,7 +45,8 @@ export function getPlacesOfOneUser(id) {
 }
 
 export function getPlace(id) {
-
+    // console.log("query is>>>>>", query)
+    // const queryParam = queryString.stringify(query);
     const url = `${apiBaseUrl}/places/${id}`;
     return Request.get(url).then((response => {
         console.log('response: ', response)
@@ -75,12 +76,13 @@ export function addPlace(place) {
 }
 
 export function updatePlace(place) {
+    //console.log("params>>>>>>>", request.params)
     let token = localStorage.getItem("token")
     const id = place._id
     const updatedData = {
         title: place.title,
         address: place.address,
-        images: place.images,
+        //images: place.images,
         description: place.description,
         logo: place.logo,
         category : place.category

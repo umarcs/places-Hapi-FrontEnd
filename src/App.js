@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Home from './_Component/home/body';
-import { BrowserRouter, Route, Link, NavLink, Switch, Redirect, Prompt } from 'react-router-dom';
-import { NestedRoute, SubRoute } from 'react-nested-route'
+import { BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import UserDashboard from './_Component/dashboard/body'
 import { bindActionCreators } from 'redux';
@@ -21,7 +20,7 @@ import categories from './_Component/categories/categories'
 class App extends Component {
   componentDidMount() {
     if (localStorage.token) {
-      this.props.getUserDataByToken(); ``
+      this.props.getUserDataByToken(); 
       this.props.getCategories();
      
 

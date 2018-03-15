@@ -32,9 +32,6 @@ const validate = values => {
     return errors
 }
 
-const required = value => value
-    ? undefined
-    : 'Required';
 class UpdatePlace extends Component {
     constructor(props) {
         super(props);
@@ -47,12 +44,15 @@ class UpdatePlace extends Component {
     }
 
     componentDidMount() {
-        // console.log('PLACE MOUNTED:::: >>> ', this.props)
-        const {params} = this.props.match;
-
+        //  console.log('PLACE MOUNTED:::: >>> ', this.props.location.search)
+        // const rawURL = this.props.location.search;
+        //  query = queryString.parse(rawURL);
+        // console.log("places of params", query)
+        const id = this.props.match.params.pId
+        console.log("id of place is", id)
         this
             .props
-            .getPlace(params.pId)
+            .getPlace(id)
     }
     handleChange(event) {
         this.setState({selectCat: event.target.value})

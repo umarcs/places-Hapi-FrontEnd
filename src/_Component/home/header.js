@@ -47,10 +47,14 @@ class View extends Component {
     searchPlaces() {
         const {selectCat: c, inputVal: q} = this.state;
         let query = {};
-        if (c) {
+        if (c && q){
+            query.c = c;
+            query.q = q
+        }
+        else if (c) {
             query.c = c
         }
-        if (q) {
+        else if (q) {
             query.q = q
         }
 
@@ -60,7 +64,7 @@ class View extends Component {
     }
 
     render() {
-        console.log("this.props: ", this.state)
+        //console.log("this.props: ", this.state)
         return (
 
             <div>
@@ -82,7 +86,7 @@ class View extends Component {
 
                             <ul className="navbar-nav ml-auto">
                                 <div className="dropdown">
-                                    <Link to={`/places-list?c=${this.state.selectCat}`}>
+                                    <Link to= {this.state.selectCat ? `/places-list?c=${this.state.selectCat}` : ""}>
                                         <select
                                             className="btn btn-secondary dropdown-toggle"
                                             name="selectCat"
@@ -111,7 +115,7 @@ class View extends Component {
                                                     value={this.state.inputVal}
                                                     onChange={this.handleChange}
                                                     className="search-query form-control"
-                                                    placeholder="Search"/>
+                                                    placeholder="Search Place"/>
                                                 <span className="input-group-btn">
                                                     <button
                                                         className="btn btn-danger"

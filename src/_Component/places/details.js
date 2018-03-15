@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {debug} from 'util';
 
 import {getPlace} from '../../_Action/place';
 import queryString from 'query-string'

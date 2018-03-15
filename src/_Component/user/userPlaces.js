@@ -75,6 +75,7 @@ class UserPlaces extends React.Component {
   }
 }
 function mapStateToProps(state) {
+  console.log("places slug",  state.places.places )
   return {user: state.user.login, places: state.places.places};
 }
 

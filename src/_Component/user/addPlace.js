@@ -32,7 +32,6 @@ const validate = values => {
 
     return errors
 }
-const required = value => value ? undefined : 'Required';
 class AddPlace extends Component {
     constructor(props) {
         super(props);

@@ -20,7 +20,8 @@ export function signup(data){
         }
     }))
     .catch((err)=>{
-        throw new SubmissionError({_error: 'Email Already Exist!' })
+        const { body} = err.response || {};
+        throw new SubmissionError({_error: body.message })
     })
     
 }
@@ -36,8 +37,10 @@ export function login(data){
         }
     }))
     .catch((err)=>{
-        console.log("errr", err)
-        throw new SubmissionError({_error: 'Email Or Password Incorrect!' })
+       // console.log("errr", err)
+       const { body} = err.response || {};
+       
+        throw new SubmissionError({_error: body.message })
     })
 }
 
