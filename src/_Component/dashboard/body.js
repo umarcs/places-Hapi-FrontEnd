@@ -38,7 +38,7 @@ class Dashboard extends React.Component {
             {this.props.children}
           </div>
         </div>
-        <Footer/>
+        {/* <Footer/> */}
       </div>
     )
   }

@@ -7,13 +7,20 @@ import { addPlace } from '../../_Action/place';
 import FlatButton from 'material-ui/FlatButton';
 import MenuItem from 'material-ui/MenuItem';
 import DropDownMenu from 'material-ui/DropDownMenu';
+import { style } from 'typestyle';
 
+import SelectField from 'material-ui/SelectField';
 
 const errorColor = {
-    color : "red"
+    color: "red"
 }
+
 const validate = values => {
     const errors = {}
+    const requiredFields = ['selectCat']
+    if (!values.selectCat) {
+        errors.selectCat = 'Required'
+    }
     if (!values.title) {
         errors.title = 'Required'
     }
@@ -38,10 +45,12 @@ class AddPlace extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.state = {
             selectCat: null,
+            bError : null,
+            bSucess : null
         };
     }
     handleChange(event, index, value) {
-        console.log("popo", event, index, value, event.target)
+        //console.log("popo", event, index, value, event.target)
         this.setState({
             'selectCat': value
         })
@@ -49,11 +58,25 @@ class AddPlace extends Component {
     onSubmit(place) {
         place.category = this.state.selectCat
         place.user = this.props.user._id;
+        console.log("promise>>", this.props.addPlace(place))
         this.props.addPlace(place)
+        .then(pass=>{
+            console.log("resolve")
+            this.setState({
+                bSucess : "Place Added Sucessfully"
+            })
+        })
+        .catch(err=>{
+            var bError = err.response.body.message;
+            this.setState({
+                bError 
+            })
+        })
     }
 
     render() {
         const { error, handleSubmit, pristine, reset, submitting } = this.props;
+        //console.log("error>>>", error)
         return (
             <div className="container containerWidth">
                 <div className="row">
@@ -64,21 +87,19 @@ class AddPlace extends Component {
                         <br />
                         <div className="card bg-faded card-block">
                             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-                                <DropDownMenu
-                                    name="selectCat"
+                                <Field name="selectCat"
                                     value={this.state.selectCat}
                                     onChange={this.handleChange}
-                                // autoWidth={false}
+                                    component={renderSelectField}
+                                    label="Select Category"
                                 >
                                     <MenuItem value={this.state.selectCat} primaryText="Select Category" />
-
                                     {
                                         this.props.categories.map((categories, i) => {
                                             return <MenuItem key={i} value={categories._id} primaryText={categories.title} />
-
                                         })
                                     }
-                                </DropDownMenu>
+                                </Field>
                                 <div className="dropdown">
                                 </div>
                                 <div className="row">
@@ -103,24 +124,36 @@ class AddPlace extends Component {
                                     </div>
 
                                 </div>
+                                {this.state.bError
+                                 ?
+                                 <strong style={{color :'red'}}>{this.state.bError}</strong>
+                                 :
+                                 this.state.bSucess
+                                 ?
+                                  <strong style={{color :'green'}}>asdasdas</strong>
+                                  :
+                                  ''
+                                
+                                 
+                                }  
                                 <br />
                                 <div className="col-md-9">
-                                <div className="row">
-                                    <div className="col-md-2">
-                                        <button primary={true} className="btn btn-success" type="submit" disabled={submitting}>Add Place </button>
+                                    <div className="row">
+                                        <div className="col-md-2">
+                                            <button primary={true} className="btn btn-success" type="submit" disabled={pristine || submitting}>Add Place </button>
 
-                                    </div>
-                                <div className="col-md-2">
-                                        <button className="btn btn-danger" type="button" disabled={pristine || submitting} onClick={reset}>  Clear Values
+                                        </div>
+                                        <div className="col-md-2">
+                                            <button className="btn btn-danger" type="button" disabled={pristine || submitting} onClick={reset}>  Clear Values
                                          </button>
-                                    </div>
-                                <div className="col-md-3">
-                                        <FlatButton>
-                                            <Link to="/profile">Back to profile</Link>
-                                        </FlatButton>
+                                        </div>
+                                        <div className="col-md-3">
+                                            <FlatButton>
+                                                <Link to="/profile">Back to profile</Link>
+                                            </FlatButton>
+                                        </div>
                                     </div>
                                 </div>
-                                    </div>
                             </form>
                         </div>
                     </div>
@@ -130,6 +163,16 @@ class AddPlace extends Component {
     };
 }
 
+const renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => (
+
+    <SelectField
+        floatingLabelText={label}
+        errorText={touched && error}
+        {...input}
+        onChange={(event, index, value) => input.onChange(value)}
+        children={children}
+        {...custom} />
+)
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
     <div>
         <br /> <label>{label}</label>
@@ -153,6 +196,7 @@ function mapDispathToProps(dispatch) {
 AddPlace = reduxForm({
     form: "Update Form",
     validate,
+    // validate2
 })(AddPlace)
 export default connect(mapStateToProps, mapDispathToProps)(AddPlace);
 

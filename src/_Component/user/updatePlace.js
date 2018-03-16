@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
-import {bindActionCreators} from "redux";
-import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {Field, reduxForm} from 'redux-form';
-import {getPlace, updatePlace} from '../../_Action/place';
+import React, { Component } from 'react';
+import { bindActionCreators } from "redux";
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
+import { getPlace, updatePlace } from '../../_Action/place';
 import queryString from 'query-string';
 import FlatButton from 'material-ui/FlatButton';
+import { style } from 'typestyle';
 
 //import submit from '../../container/user-form//updateUser';
 const errorColor = {
@@ -39,33 +40,44 @@ class UpdatePlace extends Component {
             .handleChange
             .bind(this);
         this.state = {
-            selectCat: null
+            selectCat: null,
+            bError: null,
+            bSucess: null
         };
     }
-
+    
     componentDidMount() {
+
         //  console.log('PLACE MOUNTED:::: >>> ', this.props.location.search)
         // const rawURL = this.props.location.search;
         //  query = queryString.parse(rawURL);
         // console.log("places of params", query)
         const id = this.props.match.params.pId
-        console.log("id of place is", id)
-        this
-            .props
-            .getPlace(id)
+        this.props.getPlace(id)
     }
     handleChange(event) {
-        this.setState({selectCat: event.target.value})
+        this.setState({ selectCat: event.target.value })
     }
     onSubmit(place) {
         place.category = this.state.selectCat
-        this
-            .props
-            .updatePlace(place)
+        this.props.updatePlace(place)
+            .then(pass => {
+                console.log("resolve")
+                this.setState({
+                    bSucess: "Place Added Sucessfully"
+                })
+            })
+            .catch(err => {
+                var bError = err.response.body.message;
+                this.setState({
+                    bError
+                })
+            })
+
     }
 
     render() {
-        const {error, handleSubmit, pristine, reset, submitting} = this.props
+        const { error, handleSubmit, pristine, reset, submitting } = this.props
         // let selectCat = category._id;
 
         return (
@@ -76,7 +88,7 @@ class UpdatePlace extends Component {
                             <div className="card bg-faded card-block">
                                 <h3>Update Your Place</h3>
                             </div>
-                            <br/>
+                            <br />
                             <div className="card bg-faded card-block">
                                 <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                                     <div className="row">
@@ -101,30 +113,42 @@ class UpdatePlace extends Component {
                                     </div>
                                     <div className="row">
                                         <div className="col-md-6">
-                                            <Field name="title" type="text" component={renderField} label="Title"/>
+                                            <Field name="title" type="text" component={renderField} label="Title" />
                                         </div>
                                         <div className="col-md-6">
-                                            <Field name="address" type="text" component={renderField} label="Address"/>
+                                            <Field name="address" type="text" component={renderField} label="Address" />
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="col-md-6">
-                                            <Field name="images" type="text" component={renderField} label="Image"/>
+                                            <Field name="images" type="text" component={renderField} label="Image" />
                                         </div>
                                         <div className="col-md-6">
                                             <Field
                                                 name="description"
                                                 type="text"
                                                 component={renderField}
-                                                label="Description"/>
+                                                label="Description" />
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="col-md-6">
-                                            <Field name="logo" type="text" component={renderField} label="Logo"/>
+                                            <Field name="logo" type="text" component={renderField} label="Logo" />
                                         </div>
                                     </div>
-                                    <br/>
+                                    {this.state.bError
+                                        ?
+                                        <strong style={{ color: 'red' }}>{this.state.bError}</strong>
+                                        :
+                                        this.state.bSucess
+                                            ?
+                                            <strong style={{ color: 'green' }}>asdasdas</strong>
+                                            :
+                                            ''
+
+
+                                    }
+                                    <br />
                                     <div className="col-md-8">
                                         <div className="row">
                                             <div className="col-md-2">
@@ -165,18 +189,18 @@ const renderField = ({
         error
     }
 }) => (
-    <div>
-        <br/>
-        <label>{label}</label>
         <div>
-            <input {...input} className="form-control" placeholder={label} type={type}/> {touched && error && <span style={errorColor}>{error}</span>}
+            <br />
+            <label>{label}</label>
+            <div>
+                <input {...input} className="form-control" placeholder={label} type={type} /> {touched && error && <span style={errorColor}>{error}</span>}
+            </div>
         </div>
-    </div>
-)
+    )
 
 function mapStateToProps(state) {
-    console.log("state is here>>>>", state.places.place)
-    return {categories: state.category.categories, place: state.places.place, initialValues: state.places.place};
+    // console.log("state is here>>>>", state.places.place)
+    return { categories: state.category.categories, place: state.places.place, initialValues: state.places.place };
 }
 function mapDispathToProps(dispatch) {
     return bindActionCreators({
@@ -184,5 +208,5 @@ function mapDispathToProps(dispatch) {
         updatePlace
     }, dispatch)
 }
-UpdatePlace = reduxForm({form: "Update Place", validate, enableReinitialize: true})(UpdatePlace)
+UpdatePlace = reduxForm({ form: "Update Place", validate, enableReinitialize: true })(UpdatePlace)
 export default connect(mapStateToProps, mapDispathToProps)(UpdatePlace);
