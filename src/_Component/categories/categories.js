@@ -27,7 +27,7 @@ class Home extends Component {
                                         <a href="#"><img className="card-img-top" src="http://placehold.it/700x400" alt/></a>
                                         <div className="card-body">
                                             <h4 className="card-title">
-                                                <Link to={`/places-list?c=${category._id}`}>
+                                                <Link to={`/places-list?c=${category.slug}`}>
                                                     {category.title}
                                                 </Link>
                                             </h4>

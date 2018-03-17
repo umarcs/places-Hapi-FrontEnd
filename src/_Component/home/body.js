@@ -13,8 +13,8 @@ import ActionAndroid from 'material-ui/svg-icons/action/android';
 
 import Header from './header';
 import Footer from './footer'
-import Places from '../places/places'
-import Categories from '../categories/categories'
+// import Places from '../places/placesForm'
+// import Categories from '../categories/categories'
 
 import Map from '../googleMap/map'
 const pos = {

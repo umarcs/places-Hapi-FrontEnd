@@ -14,7 +14,7 @@ import updateUser from './_Container/user/updateUser';
 import updatePlace from './_Container/places/updatePLace';
 import profile from './_Component/user/profile';
 import placeDetail from './_Component/places/details'
-import placesList from './_Component/places/places';
+import searchPlaces from './_Component/places/searchPlaces';
 import categories from './_Component/categories/categories'
 
 class App extends Component {
@@ -52,7 +52,7 @@ class App extends Component {
             }
             <Home>
             <Route exact path="/" component={categories} />
-              <Route exact path="/places-list" component={placesList} />
+              <Route exact path="/places-list" component={searchPlaces} />
               <Route exact path="/places/d/:pId" component={placeDetail} />
             </Home>
           </Switch>

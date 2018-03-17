@@ -97,7 +97,7 @@ class View extends Component {
                                                 .props
                                                 .categories
                                                 .map((data, id) => {
-                                                    return <option value={data._id} key={id}>{data.title}</option>
+                                                    return <option value={data.slug} key={id}>{data.title}</option>
                                                 })
                                             }
                                         </select>
