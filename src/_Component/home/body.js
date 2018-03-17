@@ -10,7 +10,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { getCategories } from '../../_Action/category'
 import { getPlaces } from '../../_Action/place';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
-import PlaceForm from '../../_Container/user/addPlace';
 
 import Header from './header';
 import Footer from './footer'
@@ -18,122 +17,49 @@ import Places from '../places/places'
 import Categories from '../categories/categories'
 
 import Map from '../googleMap/map'
-const div = style({
-    marginTop: '60px',
-})
-var divStyle = {
+const pos = {
+    position: "sticky"
+}
+const div = style({ marginTop: '60px' })
+const divStyle = {
     marginTop: "70px"
 }
 class Home extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.searchPlaces = this.searchPlaces.bind(this)
-    //     this.handleChange = this.handleChange.bind(this);
-
-    //     this.state = {
-    //         selectCat: null,
-    //         inputVal: ''
-    //     };
-
-    // }
-
-
-    // componentDidMount() {
-    //     this.props.getCategories()
-    // }
-
-    // handleChange(event) {
-
-    //     console.log(event.target.name, event.target.value)
-
-
-    //     this.setState({
-    //         [event.target.name]: event.target.value
-    //     })
-
-    // }
-
-    // searchPlaces() {
-    //     const { selectCat: c, inputVal: q } = this.state;
-    //     let query = {};
-    //     if (c) {
-    //         query.c = c
-    //     }
-    //     if (q) {
-    //         query.q = q
-    //     }
-
-    //     console.log("query is: ", query)
-    //     this.props.getPlaces(query)
-    // }
-
     render() {
         return (
-
-
-            <div>
-                {/* // Header */}
+            <div className="container-fluid h-100">
                 <Header />
-                {/* Page Content */}
-                <div className="container" style={divStyle}>
-                    <div className="row">
-                        <div className="col-lg-4">
-                            <div className="list-group">
-                              
-
-                                <Map
-                                    zoom={16}
-                                    center={{ lat: 30.231078, lng: 71.456956 }}
-                                    containerElement={<div style={{ height: `400px` }} />}
-                                    mapElement={<div style={{ height: `100%` }} />}
-
-                                />
-                                
-                            </div>
+                <div className="row h-100">
+                    <div className="col-sm-4 col-2 h-100 py-2 fixed-top" id="left">
+                        <div>
+                            <Map
+                                zoom={16}
+                                center={{
+                                    lat: 30.231078,
+                                    lng: 71.456956
+                                }}
+                                containerElement={<div style={{ height: `680px` }} />}
+                                mapElement={<div style={{ height: `100%` }} />} />
                         </div>
-                        {this.props.children}
-                        {/* <Categories /> */}
-                        {/* <Places /> */}
                     </div>
-                    {/* /.row */}
+                    <div className="col offset-2 offset-sm-4 py-2" style={{ marginTop: `50px` }}>
+                        {this.props.children}
+                    </div>
                 </div>
-                {/* /.container */}
-                {/* Footer */}
                 <Footer />
-
             </div>
-
-
         )
     }
 }
 
-
-
 function mapStateToProps(state) {
-    console.log("state is here", state)
-    return {
-        categories: state.category.categories,
-        places: state.places.places
-    };
+    return { categories: state.category.categories, places: state.places.places };
 }
 function mapDispathToProps(dispatch) {
-    return bindActionCreators({ getCategories, getPlaces }, dispatch)
+    return bindActionCreators({
+        getCategories,
+        getPlaces
+    }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispathToProps)(Home)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

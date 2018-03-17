@@ -6,14 +6,14 @@ let initialState = {
 }
 export default function (state = initialState, action) {
     switch (action.type) {
-        case "SIGN-UP":
+        case "SIGN_UP":
             return {
                 ...state,
                 signup: action.payload
             };
             break;
 
-        case "LOG-IN":
+        case "LOG_IN":
             return {
                 ...state,
                 login: action.payload
@@ -36,7 +36,8 @@ export default function (state = initialState, action) {
 
             case 'LOG_OUT':
             return {
-                initialState
+                ...state,
+                login: null
             };
             break;
     }

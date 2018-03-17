@@ -38,8 +38,8 @@ class Map extends Component {
                 {<Marker
                     title="umar house"
                     position={{ lat: 30.231078, lng: 71.456956 }}
-                   
-                    />
+
+                />
                 }
 
                 {markers.map((Marker, index) => (

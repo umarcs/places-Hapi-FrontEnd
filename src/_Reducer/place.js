@@ -30,6 +30,12 @@ export default function (state = initialState, action) {
                 place: action.payload
             };
             break;
+        case "UPDATE_PLACE":
+            return {
+                ...state,
+                place: action.payload
+            };
+            break;
     }
 
     

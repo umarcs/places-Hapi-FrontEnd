@@ -10,7 +10,7 @@ import UpdateUser from '../../_Component/user/updateUser'
 class UpdateUserData extends Component {
     constructor() {
         super();
-        this.update = this.update   .bind(this)
+        this.update = this.update.bind(this)
 
     }
     update(data) {
