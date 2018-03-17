@@ -1,23 +1,17 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-
 import {getPlace} from '../../_Action/place';
 import queryString from 'query-string'
 
 class Place_Detail extends Component {
-
     constructor() {
         super();
     }
-
     componentDidMount() {
         const {params} = this.props.match;
-        this
-            .props
-            .getPlace(params.pId)
+        this.props.getPlace(params.pId)
     }
-
     render() {
         return (
             <div className="col-lg-8">

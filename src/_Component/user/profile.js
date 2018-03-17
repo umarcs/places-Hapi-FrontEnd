@@ -1,13 +1,11 @@
 import React from 'react'
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 
 class Profile extends React.Component {
-
     render() {
         return (
-
             <div id="user-profile-2" className="user-profile">
                 <div className="tabbable">
 
@@ -20,11 +18,11 @@ class Profile extends React.Component {
                                             className="editable img-responsive"
                                             alt=" Avatar"
                                             id="avatar2"
-                                            src="http://bootdey.com/img/Content/avatar/avatar6.png"/>
+                                            src="http://bootdey.com/img/Content/avatar/avatar6.png" />
                                     </span>
-                                    <div className="space space-4"/>
+                                    <div className="space space-4" />
                                     <a href="" className="btn btn-sm btn-block btn-success">
-                                        <i className="ace-icon fa fa-plus-circle bigger-120"/>
+                                        <i className="ace-icon fa fa-plus-circle bigger-120" />
                                         <span className="bigger-110">Add picture</span>
                                     </a>
 
@@ -47,7 +45,7 @@ class Profile extends React.Component {
                                             <div className="profile-info-name">
                                                 Last Name</div>
                                             <div className="profile-info-value">
-                                                <i className=" light-orange bigger-110"/>
+                                                <i className=" light-orange bigger-110" />
                                                 <span>{this.props.users.lastName}</span>
                                             </div>
                                         </div>
@@ -67,7 +65,7 @@ class Profile extends React.Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="hr hr-8 dotted"/>
+                                    <div className="hr hr-8 dotted" />
                                     <p data-placement="top" data-toggle="tooltip" title="Edit">
                                         <Link to={`/profile/update-profile`} className="btn btn-primary btn-xs">EDIT<span className="glyphicon glyphicon-pencil"></span>
                                         </Link>
@@ -83,8 +81,7 @@ class Profile extends React.Component {
     }
 }
 function mapStateProps(state) {
-    //console.log("data hi data", state)
-    return {users: state.user.login}
+    return { users: state.user.login }
 
 }
 function mapDispathToProps(dispatch) {

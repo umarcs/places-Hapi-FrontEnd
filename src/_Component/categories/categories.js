@@ -51,14 +51,10 @@ class Home extends Component {
 }
 
 function mapStateToProps(state) {
-    // console.log("state is here", state)
     return {categories: state.category.categories, places: state.places.places};
 }
 function mapDispathToProps(dispatch) {
-    return bindActionCreators({
-        getCategories,
-        getPlaces
-    }, dispatch)
+    return bindActionCreators({ getCategories, getPlaces }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispathToProps)(Home)

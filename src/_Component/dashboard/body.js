@@ -13,20 +13,13 @@ const margin = {
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-    this.updateUser = this
-      .updateUser
-      .bind(this)
-    this.PlaceAdd = this
-      .PlaceAdd
-      .bind(this)
+    this.updateUser = this.updateUser.bind(this)
+    this.PlaceAdd = this.PlaceAdd.bind(this)
   }
   updateUser(data) {
-    this
-      .props
-      .update(data)
+    this.props.update(data)
   }
   PlaceAdd(data) {
-    console.log("add palce data is ", data)
   }
 
   render() {
