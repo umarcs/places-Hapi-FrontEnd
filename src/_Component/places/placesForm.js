@@ -8,7 +8,6 @@ import queryString from 'query-string';
 import FlatButton from 'material-ui/FlatButton';
 import { style } from 'typestyle';
 
-//import submit from '../../container/user-form//updateUser';
 const errorColor = {
     color: "red"
 }
@@ -52,27 +51,12 @@ const PlacesForm = props => {
                                 <div className="row">
                                     <div className="col-md-6">
                                         <div className="dropdown">
-                                            {/* <Field
-                                                className="btn btn-default"
-                                                name="category"
-                                                component="select"
-                                            >
-                                                <option>select</option>    
-                                                {props
-                                                    .categories
-                                                    .map((category, id) => {
-                                                        return <option value={category._id} key={id}>{category.title}</option>
-                                                    })
-                                                }
-                                            </Field> */}
                                             <Field
                                                 name="category"
-                                                //value= "null"
-                                               // onChange={this.handleChange}
                                                 component={renderSelectField}
                                                 label="Select Category"
                                             >
-                                                <MenuItem  primaryText="Select Category" />
+                                                <MenuItem primaryText="Select Category" />
                                                 {
                                                     props.categories.map((categories, i) => {
                                                         return <MenuItem key={i} value={categories._id} primaryText={categories.title} />
@@ -154,15 +138,7 @@ const renderSelectField = ({ input, label, meta: { touched, error }, children, .
         {...custom} />
 )
 
-const renderField = ({
-    input,
-    label,
-    type,
-    meta: {
-        touched,
-        error
-    }
-}) => (
+const renderField = ({input, label, type, meta: { touched, error } }) => (
         <div>
             <br />
             <label>{label}</label>
@@ -170,10 +146,9 @@ const renderField = ({
                 <input {...input} className="form-control" placeholder={label} type={type} /> {touched && error && <span style={errorColor}>{error}</span>}
             </div>
         </div>
-    )
+)
 
 function mapStateToProps(state) {
-    console.log("state is here>>>>", state)
     return { categories: state.category.categories };
 }
 

@@ -1,29 +1,25 @@
-import React, {Component} from 'react';
-import {style} from 'typestyle';
+import React, { Component } from 'react';
+import { style } from 'typestyle';
 import Signup from '../../_Container/user/signup';
 import Login from '../../_Container/user/login';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
-import {BrowserRouter, Route, Switch, Link} from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
-import {getCategories} from '../../_Action/category'
-import {getPlaces} from '../../_Action/place';
+import { getCategories } from '../../_Action/category'
+import { getPlaces } from '../../_Action/place';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
 
-const div = style({marginTop: '60px'})
+const div = style({ marginTop: '60px' })
 const divStyle = {
     marginTop: "70px"
 }
 class View extends Component {
     constructor(props) {
         super(props);
-        this.searchPlaces = this
-            .searchPlaces
-            .bind(this)
-        this.handleChange = this
-            .handleChange
-            .bind(this);
+        this.searchPlaces = this.searchPlaces.bind(this)
+        this.handleChange = this.handleChange.bind(this);
 
         this.state = {
             selectCat: null,
@@ -32,9 +28,7 @@ class View extends Component {
     }
 
     componentDidMount() {
-        this
-            .props
-            .getCategories()
+        this.props.getCategories()
     }
 
     handleChange(event) {
@@ -44,9 +38,9 @@ class View extends Component {
     }
 
     searchPlaces() {
-        const {selectCat: c, inputVal: q} = this.state;
+        const { selectCat: c, inputVal: q } = this.state;
         let query = {};
-        if (c && q){
+        if (c && q) {
             query.c = c;
             query.q = q
         }
@@ -56,10 +50,7 @@ class View extends Component {
         else if (q) {
             query.q = q
         }
-
-        this
-            .props
-            .getPlaces(query)
+        this.props.getPlaces(query)
     }
 
     render() {
@@ -79,13 +70,13 @@ class View extends Component {
                             aria-controls="navbarResponsive"
                             aria-expanded="false"
                             aria-label="Toggle navigation">
-                            <span className="navbar-toggler-icon"/>
+                            <span className="navbar-toggler-icon" />
                         </button>
                         <div className="collapse navbar-collapse" id="navbarResponsive">
 
                             <ul className="navbar-nav ml-auto">
                                 <div className="dropdown">
-                                    <Link to= {this.state.selectCat ? `/places-list?c=${this.state.selectCat}` : ""}>
+                                    <Link to={this.state.selectCat ? `/places-list?c=${this.state.selectCat}` : ""}>
                                         <select
                                             className="btn btn-secondary dropdown-toggle"
                                             name="selectCat"
@@ -114,7 +105,7 @@ class View extends Component {
                                                     value={this.state.inputVal}
                                                     onChange={this.handleChange}
                                                     className="search-query form-control"
-                                                    placeholder="Search Place"/>
+                                                    placeholder="Search Place" />
                                                 <span className="input-group-btn">
                                                     <button
                                                         className="btn btn-danger"
@@ -149,23 +140,18 @@ class View extends Component {
                         </div>
                     </div>
                 </nav>
-
-                <Signup/>
-                <Login/>
+                <Signup />
+                <Login />
             </div>
         )
     }
 }
 
 function mapStateToProps(state) {
-    // console.log("state is here", state)
-    return {categories: state.category.categories, places: state.places.places};
+    return { categories: state.category.categories, places: state.places.places };
 }
 function mapDispathToProps(dispatch) {
-    return bindActionCreators({
-        getCategories,
-        getPlaces
-    }, dispatch)
+    return bindActionCreators({ getCategories, getPlaces }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispathToProps)(View)

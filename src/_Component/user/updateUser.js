@@ -23,15 +23,7 @@ const validate = values => {
   }
   return errors
 }
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: {
-    touched,
-    error
-  }
-}) => (
+const renderField = ({ input, label, type, meta: { touched, error }}) => (
   <div>
     <br/>
     <label>{label}</label>
@@ -43,7 +35,6 @@ const renderField = ({
 
 let UpdateUserForm = props => {
   const {error, handleSubmit, pristine, reset, submitting} = props
-  console.log("edded", error)
   return (
     <div>
       <div className="container containerWidth">
@@ -95,7 +86,6 @@ let UpdateUserForm = props => {
 };
 
 function mapStateProps(state) {
-  //console.log("data hi data", state)
   return {users: state.user.login, initialValues: state.user.login}
 
 }

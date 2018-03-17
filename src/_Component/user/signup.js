@@ -23,16 +23,7 @@ const validate = values => {
     return errors
 }
 
-const renderField = ({
-
-    input,
-    label,
-    type,
-    meta: {
-        touched,
-        error
-    }
-}) => (
+const renderField = ({ input, label, type, meta: { touched, error }}) => (
         <div>
             <label className="control-label">{label}</label>
             <div>
@@ -43,7 +34,7 @@ const renderField = ({
                     placeholder={label} /> {touched && error && <span className={errors}>{error}</span>}
             </div>
         </div>
-    )
+ )
 
 const signUp = props => {
     const { error, handleSubmit, pristine, reset, submitting } = props

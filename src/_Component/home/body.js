@@ -27,59 +27,32 @@ const divStyle = {
 class Home extends Component {
     render() {
         return (
-            // <div>
-            //     <Header />
-            //     <div className="container" style={divStyle}>
-            //         <div className="row">
-            //             <div className="col-lg-4">
-            //                 <div className="list-group sticky-top" style={pos}>
-            //                     <Map
-            //                         zoom={16}
-            //                         center={{
-            //                             lat: 30.231078,
-            //                             lng: 71.456956
-            //                         }}
-            //                         containerElement={<div style={{ height: `400px` }} />}
-            //                         mapElement={<div style={{ height: `100%` }} />} />
-            //                 </div>
-            //             </div>
-            //             {this.props.children}
-            //         </div>
-            //     </div>
-            //     <Footer />
-            // </div >
-
-         
-
-                        <div className="container-fluid h-100">
-                        <Header />
-                            <div className="row h-100">
-                                <div className="col-sm-4 col-2 h-100 py-2 fixed-top"  id="left">
-                                    <div>
-                                    <Map
-                                        zoom={16}
-                                        center={{
-                                            lat: 30.231078,
-                                            lng: 71.456956
-                                        }}
-                                        containerElement={<div style={{ height: `680px` }} />}
-                                        mapElement={<div style={{ height: `100%` }} />} />
-                                    </div>
-                                </div>
-                                {/* <div className="col-sm-6 invisible col-2">hidden spacer</div> */}
-                                <div className="col offset-2 offset-sm-4 py-2" style={{ marginTop: `50px` }}>
-                                {this.props.children}
-                                </div>
-                            </div>
-                            <Footer />
+            <div className="container-fluid h-100">
+                <Header />
+                <div className="row h-100">
+                    <div className="col-sm-4 col-2 h-100 py-2 fixed-top" id="left">
+                        <div>
+                            <Map
+                                zoom={16}
+                                center={{
+                                    lat: 30.231078,
+                                    lng: 71.456956
+                                }}
+                                containerElement={<div style={{ height: `680px` }} />}
+                                mapElement={<div style={{ height: `100%` }} />} />
                         </div>
-         
+                    </div>
+                    <div className="col offset-2 offset-sm-4 py-2" style={{ marginTop: `50px` }}>
+                        {this.props.children}
+                    </div>
+                </div>
+                <Footer />
+            </div>
         )
     }
 }
 
 function mapStateToProps(state) {
-    // console.log("state is here", state)
     return { categories: state.category.categories, places: state.places.places };
 }
 function mapDispathToProps(dispatch) {

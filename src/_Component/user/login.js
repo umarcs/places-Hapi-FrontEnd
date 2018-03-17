@@ -18,15 +18,7 @@ const validate = values => {
     return errors
 }
 
-const renderField = ({
-    input,
-    label,
-    type,
-    meta: {
-        touched,
-        error
-    }
-}) => (
+const renderField = ({input, label, type, meta: { touched, error }}) => (
     <div>
         <label>{label}</label>
         <div>
@@ -37,7 +29,6 @@ const renderField = ({
 
 const LoginForm = (props) => {
     const {error, handleSubmit, pristine, reset, submitting} = props
-    //console.log("gg", handleSubmit, submitting)
     return (
         <div>
             <div
@@ -87,5 +78,5 @@ const LoginForm = (props) => {
 
 export default reduxForm({
     form: 'loginForm', // a unique identifier for this form
-    validate, // <--- validation function given to redux-form                     // <--- warning function given to redux-form
+    validate, // <--- validation function given to redux-form  // <--- warning function given to redux-form
 })(LoginForm)
