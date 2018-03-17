@@ -8,7 +8,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { getCategories } from '../../_Action/category'
 import { getPlaces } from '../../_Action/place';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
-import PlaceForm from '../../_Container/user/addPlace';
 import queryString from 'query-string'
 
 const div = style({ marginTop: '60px' })

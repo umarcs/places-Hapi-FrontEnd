@@ -8,10 +8,10 @@ import { connect } from 'react-redux';
 import { getUserDataByToken } from './_Action/user'
 import { getCategories } from './_Action/category'
 
-import addPlace from './_Component/user/addPlace'
-import userPlaces from './_Component/user/userPlaces'
+import addPlace from './_Container/places/addPlace'
+import userPlaces from './_Component/places/userPlaces'
 import updateUser from './_Container/user/updateUser';
-import updatePlace from './_Component/user/updatePlace';
+import updatePlace from './_Container/places/updatePLace';
 import profile from './_Component/user/profile';
 import placeDetail from './_Component/places/details'
 import placesList from './_Component/places/places';

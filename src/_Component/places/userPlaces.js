@@ -44,6 +44,7 @@ class UserPlaces extends React.Component {
                     <th>Title</th>
                     <th>Description</th>
                     <th>Address</th>
+                    <th>Status</th>
                     <th>Edit</th>
                   </thead>
                   <tbody>
@@ -55,6 +56,7 @@ class UserPlaces extends React.Component {
                           <td>{data.title}</td>
                           <td>{data.description}</td>
                           <td>{data.address}</td>
+                          <td>{data.status}</td>
                           <p data-placement="top" data-toggle="tooltip" title="Edit">
                             <Link
                               to={`/places/update-place/${data._id}`}

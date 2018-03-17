@@ -1,6 +1,6 @@
 import Request from 'superagent';
+import { SubmissionError } from 'redux-form'
 const queryString = require('query-string');
-
 //var _ = require('lodash');
 
 // //import { SubmissionError } from 'redux-form'
@@ -73,6 +73,10 @@ export function addPlace(place) {
             payload: response.body.places
         }
     }))
+    .catch((err)=>{
+        const { body} = err.response || {};
+        throw new SubmissionError({_error: body.message })
+    })
 }
 
 export function updatePlace(place) {
@@ -100,6 +104,10 @@ export function updatePlace(place) {
             }
 
         }))
+        .catch((err)=>{
+            const { body} = err.response || {};
+            throw new SubmissionError({_error: body.message })
+        })
 
 }
 
