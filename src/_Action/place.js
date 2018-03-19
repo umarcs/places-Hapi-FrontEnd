@@ -57,12 +57,15 @@ export function getPlace(id) {
     }))
 }
 export function addPlace(place) {
+    console.log("place is>>>", place)
     const addPlace = {
         title: place.title,
         address: place.address,
         description: place.description,
         logo: place.logo,
         category : place.category,
+        lat : place.lat,
+        lng : place.lng,
         user : place.user
     }
     let token = localStorage.getItem("token")

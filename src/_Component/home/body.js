@@ -33,7 +33,7 @@ class Home extends Component {
                     <div className="col-sm-4 col-2 h-100 py-2 fixed-top" id="left">
                         <div>
                             <Map
-                                zoom={16}
+                                zoom={8}
                                 center={{
                                     lat: 30.231078,
                                     lng: 71.456956

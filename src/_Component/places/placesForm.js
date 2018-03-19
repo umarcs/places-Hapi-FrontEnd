@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import MenuItem from 'material-ui/MenuItem';
+import GoogleMap from './googleMap'
 import SelectField from 'material-ui/SelectField';
 import { Field, reduxForm } from 'redux-form';
 import queryString from 'query-string';
@@ -11,14 +12,21 @@ import { style } from 'typestyle';
 const errorColor = {
     color: "red"
 }
+
 const validate = values => {
     const errors = {}
     const requiredFields = ['category']
     if (!values.category) {
         errors.category = 'Required'
     }
+    if (!values.lat) {
+        errors.lat = 'Required'
+    }
     if (!values.title) {
         errors.title = 'Required'
+    }
+    if (!values.lng) {
+        errors.lng = 'Required'
     }
     if (!values.address) {
         errors.address = 'Required'
@@ -35,8 +43,12 @@ const validate = values => {
 
     return errors
 }
+
+
 const PlacesForm = props => {
-    const { error, handleSubmit, pristine, reset, submitting } = props
+    
+    const { error, handleSubmit, pristine, reset, submitting, setLatLng } = props
+
     return (
         <div>
             <div className="container containerWidth">
@@ -86,9 +98,15 @@ const PlacesForm = props => {
                                             label="Description" />
                                     </div>
                                 </div>
+                               
                                 <div className="row">
                                     <div className="col-md-6">
                                         <Field name="logo" type="text" component={renderField} label="Logo" />
+                                    </div>
+                                </div>
+                                <div className="row" style={{ marginTop: '40px' }}>
+                                    <div className="col-md-12">
+                                        <GoogleMap setLatLng={setLatLng} />
                                     </div>
                                 </div>
 
@@ -138,14 +156,14 @@ const renderSelectField = ({ input, label, meta: { touched, error }, children, .
         {...custom} />
 )
 
-const renderField = ({input, label, type, meta: { touched, error } }) => (
+const renderField = ({ input, label, type, meta: { touched, error } }) => (
+    <div>
+        <br />
+        <label>{label}</label>
         <div>
-            <br />
-            <label>{label}</label>
-            <div>
-                <input {...input} className="form-control" placeholder={label} type={type} /> {touched && error && <span style={errorColor}>{error}</span>}
-            </div>
+            <input {...input} className="form-control" placeholder={label} type={type} /> {touched && error && <span style={errorColor}>{error}</span>}
         </div>
+    </div>
 )
 
 function mapStateToProps(state) {

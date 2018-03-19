@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { withGoogleMap, GoogleMap, Marker, google } from 'react-google-maps';
 
 
 class Map extends Component {
@@ -24,33 +27,66 @@ class Map extends Component {
         console.log("on zoom changed", this.state.map.getZoom())
 
     }
+
     render() {
-        const markers = this.props.markers || []
+        const markers = this.props.markers || [];
+        console.log("LOLOLOLOLL>>>", this.props.place.lat)
+
         return (
+            this.props.place.lat
+                ?
+                <GoogleMap
+                    ref={this.mapLoaded.bind(this)}
+                    onZoomChanged={this.onZoomChanged.bind(this)}
+                    // onDragEnd={this.mapMoved.bind(this)}
+                    defaultZoom={this.props.zoom}
+                    defaultCenter={this.props.center}
+                >
+                    {<Marker
+                   { ...alert(this.props.place.lat)}
+                        title="umar house"
+                        position={{ lat: 30.1575, lng: 71.5249 }}
 
-            <GoogleMap
-                ref={this.mapLoaded.bind(this)}
-                onZoomChanged={this.onZoomChanged.bind(this)}
-                onDragEnd={this.mapMoved.bind(this)}
-                defaultZoom={this.props.zoom}
-                defaultCenter={this.props.center}
-            >
-                {<Marker
-                    title="umar house"
-                    position={{ lat: 30.231078, lng: 71.456956 }}
-                   
                     />
-                }
+                    }
 
-                {markers.map((Marker, index) => (
-                    <Marker {...markers} />
+                    {markers.map((Marker, index) => (
+                        <Marker {...markers} />
+                    )
+                    )}
+
+                </GoogleMap>
+                :
+                <GoogleMap
+                    ref={this.mapLoaded.bind(this)}
+                    onZoomChanged={this.onZoomChanged.bind(this)}
+                    // onDragEnd={this.mapMoved.bind(this)}
+                    defaultZoom={this.props.zoom}
+                    defaultCenter={this.props.center}
+                >
+                    {<Marker
+                        title="umar house"
+                        position={{ lat: 30.6682, lng: 73.1114 }}
+
+                    />
+                    }
+
+                    {markers.map((Marker, index) => (
+                        <Marker {...markers} />
+                    )
+                    )}
+
+                </GoogleMap>
                 )
-                )}
-
-            </GoogleMap>
-
-        )
     }
 }
 
-export default withGoogleMap(Map);
+function mapStateToProps(state) {
+    return {
+        place: state.places.place
+    };
+}
+
+
+//export default connect(mapStateToProps)(Map)
+export default connect(mapStateToProps)(withGoogleMap(Map))

@@ -9,9 +9,22 @@ import PlaceForm from '../../_Component/places/placesForm'
 class AddPlace extends React.Component {
     constructor() {
         super();
+        this.state = {
+            lat : null,
+            lng : null
+        }
     }
+    setLatLng = (latLng) => {
+        console.log('Container: ', latLng)
+        this.setState({ ...latLng })
+    }
+    
     handleSubmit(place) {
+
+        console.log('this.state: ', this.state)
         if (this.props.user) {
+            place.lat = this.state.lat;
+            place.lng = this.state.lng;
             place.user = this.props.user._id;
         }
         return addPlace(place)
@@ -20,7 +33,7 @@ class AddPlace extends React.Component {
     render() {
         return (
             <div>
-                <PlaceForm onSubmit={this.handleSubmit.bind(this)} />
+                <PlaceForm onSubmit={this.handleSubmit.bind(this)}   setLatLng={this.setLatLng}/>
             </div>
         )
     }
