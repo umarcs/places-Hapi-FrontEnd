@@ -42,10 +42,12 @@ class Map extends Component {
                     defaultZoom={this.props.zoom}
                     defaultCenter={this.props.center}
                 >
+                {console.log("this.props.place.lat: ", this.props.place.lat, this.props.place.lng)}
                     {<Marker
-                   { ...alert(this.props.place.lat)}
+                //    { ...alert(this.props.place.lat)}
                         title="umar house"
-                        position={{ lat: 30.1575, lng: 71.5249 }}
+                        // position={{ lat: 30.1575, lng: 71.5249 }}
+                        position={{...this.props.place}}
 
                     />
                     }
@@ -66,7 +68,7 @@ class Map extends Component {
                 >
                     {<Marker
                         title="umar house"
-                        position={{ lat: 30.6682, lng: 73.1114 }}
+                        position={{ lat: 30.220727976485225, lng: 71.47468533366009 }}
 
                     />
                     }
