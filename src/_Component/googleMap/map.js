@@ -1,200 +1,117 @@
-// import React, { Component } from 'react';
 
-// import { bindActionCreators } from 'redux';
-// import { connect } from 'react-redux';
-// import { withGoogleMap, GoogleMap, Marker, google } from 'react-google-maps';
+import React, { Component } from 'react';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps";
 
+var _ = require('lodash');
 
-// class Map extends Component {
-//     constructor() {
-//         super();
-//         this.state = {
-//             map: null
-//         }
-//     }
-//     mapMoved() {
-//         console.log("map moved" + JSON.stringify(this.state.map.getCenter()))
-//     }
-//     mapLoaded(map) {
-//         console.log("map LOADED", map)
-//         if (this.state.map != null)
-//             return
-//         this.setState({
-//             map
-//         })
-//     }
-//     onZoomChanged() {
-//         console.log("on zoom changed", this.state.map.getZoom())
+const MyMapComponent = withScriptjs(withGoogleMap((props) =>
 
-//     }
-
-
-//     render() {
-//         const markers = this.props.markers || [];
-
-//         return (
-//             {...this.props.place.location}
-//                 ?
-//                 <GoogleMap
-//                     ref={this.mapLoaded.bind(this)}
-//                     onZoomChanged={this.onZoomChanged.bind(this)}
-//                     // onDragEnd={this.mapMoved.bind(this)}
-//                     defaultZoom={this.props.zoom}
-//                     defaultCenter={this.props.center}
-//                 >
-//                     {<Marker
-//                         title={this.props.place.title}
-//                         position={{...this.props.place.location}}
-
-//                     />
-//                     }
-//                     {markers.map((Marker, index) => (
-//                         <Marker {...markers} />
-//                     )
-//                     )}
-
-//                 </GoogleMap>
-//                 :
-//                 <GoogleMap
-//                     ref={this.mapLoaded.bind(this)}
-//                     onZoomChanged={this.onZoomChanged.bind(this)}
-//                     // onDragEnd={this.mapMoved.bind(this)}
-//                     defaultZoom={this.props.zoom}
-//                     defaultCenter={this.props.center}
-//                 >
-//                     {<Marker
-//                         title="umar house"
-//                         position={{ lat: 30.220727976485225, lng: 71.47468533366009 }}
-
-//                     />
-//                     }
-
-//                     {markers.map((Marker, index) => (
-//                         <Marker {...markers} />
-//                     )
-//                     )}
-
-//                 </GoogleMap>
-//                 )
-//     }
-// }
-
-// function mapStateToProps(state) {
-//     return {
-//         place: state.places.place
-//     };
-// }
-
-
-// //export default connect(mapStateToProps)(Map)
-// export default connect(mapStateToProps)(withGoogleMap(Map))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import React from "react"
-import { compose, withProps, lifecycle } from "recompose"
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
-import fetch from 'isomorphic-fetch'
-
-
-
-export default compose(
-    withProps({
-        googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyDgYQytK1P59Ngr4wksYam24itQDNtBQd0",
-        loadingElement: <div style={{ height: `100%` }} />,
-        containerElement: <div style={{ height: `400px` }} />,
-        mapElement: <div style={{ height: `100%` }} />,
-    }),
-    
-    lifecycle({
-        componentDidMount() {
-
-            this.setState({
-
-                zoomToMarkers: map => {
-                    console.log("Zoom to markers");
-                    const bounds = new window.google.maps.LatLngBounds();
-                   
-                    map.props.children.forEach((child) => {
-                        if (child.type === Marker) {
-                            bounds.extend(new window.google.maps.LatLng(child.props.position.lat, child.props.position.lng));
-                        }
-                    })
-                    map.fitBounds(bounds);
+    <GoogleMap
+        ref={props.onMapMounted}
+        defaultZoom={props.zoom}
+    // defaultCenter={props.center}
+    //defaultCenter={{ lat: 25.0391667, lng: 121.525 }}
+    >
+        {
+            props.places.map((item, i) => {
+                console.log("in item:", item)
+                if (!item.location) {
+                    return "";
                 }
+                return <Marker
+                    key={i}
+                    title={item.title}
+                    position={{ lat: parseFloat(item.location.lat), lng: parseFloat(item.location.lng) }}
+                    draggable={false}
+                    
+                />
             })
-        },
-
-        componentWillReceiveProps(newProps){
-            zoomToMarkers: map => {
-                console.log("Zoom to markers");
-                const bounds = new window.google.maps.LatLngBounds();
-               
-                map.props.children.forEach((child) => {
-                    if (child.type === Marker) {
-                        bounds.extend(new window.google.maps.LatLng(child.props.position.lat, child.props.position.lng));
-                    }
-                })
-                map.fitBounds(bounds);
-            }
-        },
-
-        zoomToMarkers(map) {
-            console.log("Zoom to markers");
-            const bounds = new window.google.maps.LatLngBounds();
-           
-            map.props.children.forEach((child) => {
-                if (child.type === Marker) {
-                    bounds.extend(new window.google.maps.LatLng(child.props.position.lat, child.props.position.lng));
-                }
-            })
-            map.fitBounds(bounds);
         }
-    }),
-    withScriptjs,
-    withGoogleMap
-)(props =>
-    <GoogleMap ref={props.zoomToMarkers} defaultZoom={5} defaultCenter={{ lat: 25.0391667, lng: 121.525 }}>
-        {props.markers.map((marker,id) => (
-            <Marker
-                key={marker.id}
-                position={{ lat: marker.lat, lng: marker.lng }}
-            />
-        ))}
     </GoogleMap>
-);
+
+
+))
+
+let _MAP;
+class Maps extends Component {
+    constructor(props) {
+
+        super(props);
+        this.state = {
+            latLonArray: [],
+            infoWindowData: {},
+            center: {
+                lat: 38.828707,
+                lng: -98.241104
+            },
+            zoom: 15
+
+        }
+        this.onMapMounted = this.onMapMounted.bind(this);
+    }
+   
+    componentWillReceiveProps(nextProps) {
+        console.log("n--props....", nextProps)
+        let locArr = nextProps.places.map(place => place.location);
+        if (_MAP) {
+            var bounds = new window.google.maps.LatLngBounds();
+            if (locArr.length > 1) {
+                locArr.map((l, i) => {
+                    bounds.extend(new window.google.maps.LatLng(l.lat, l.lng));
+                });
+                _MAP.fitBounds(bounds);
+            } else if (!_.isEmpty(locArr)) {
+                _MAP.setCenter(new window.google.maps.LatLng(locArr[0].lat,locArr[0].lng));
+            }
+        }
+
+
+    }
+    onMapMounted(ref) {
+        console.log("ref is here", ref);
+        if (ref) {
+            let locArr = this.props.places.map(place => place.location);
+
+            console.log('locArr: ', locArr)
+            let map = ref.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+            var bounds = new window.google.maps.LatLngBounds();
+            if (locArr.length > 1) {
+                locArr.map((place, i) => {
+                    bounds.extend(new window.google.maps.LatLng(place.lat, place.lng));
+                });
+                map.fitBounds(bounds);
+            } else if (!_.isEmpty(locArr)) {
+                map.setCenter(new window.google.maps.LatLng(locArr[0].lat,
+                    locArr[0].lng));
+            }
+
+            _MAP = map;
+        }
+
+    }
+    render() {
+        console.log('Maps Render: ', this.props.places)
+        return (
+
+            <MyMapComponent
+                zoom = {this.props.zoom}
+                places={this.props.places}
+                onMapMounted={this.onMapMounted}
+                googleMapURL={"https://maps.googleapis.com/maps/api/js?key=AIzaSyDgYQytK1P59Ngr4wksYam24itQDNtBQd0"}
+                loadingElement={<div>{'loading...'}</div>}
+                containerElement={<div style={{ height: `700px` }} />}
+                mapElement={<div id="elementID" style={{ height: `100%` }} />}
+
+            />
+
+        )
+    }
+}
+
+export default Maps
+
+
+
 
 
 

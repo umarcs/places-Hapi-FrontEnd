@@ -18,7 +18,7 @@ const logger = createLogger();
 const store = createStore(
     allReducers,
     composeWithDevTools(
-        applyMiddleware(thunk, promise, logger)
+        applyMiddleware(thunk, promise)
     )
     
 );

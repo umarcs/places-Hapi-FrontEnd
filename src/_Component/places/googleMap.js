@@ -45,7 +45,9 @@ export default compose(
                 },
                 onPlacesChanged: () => {
                     const places = refs.searchBox.getPlaces();
-                    // const google = window.google;
+                     const google = window.google;
+                    console.log("place changed", places)
+
                     const bounds = new google.maps.LatLngBounds();
 
                     places.forEach(place => {
@@ -83,7 +85,7 @@ export default compose(
         <SearchBox
             ref={props.onSearchBoxMounted}
             bounds={props.bounds}
-            controlPosition={google.maps.ControlPosition.TOP_LEFT}
+            controlPosition={window.google.maps.ControlPosition.TOP_LEFT}
             onPlacesChanged={props.onPlacesChanged}
         >
 

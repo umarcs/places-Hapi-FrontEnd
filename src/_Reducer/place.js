@@ -1,7 +1,7 @@
 
 let initialState = {
     places: [],
-    place: {}
+    place: null
 }
 export default function (state = initialState, action) {
     console.log("palceeeee", action.type)
