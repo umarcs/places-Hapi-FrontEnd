@@ -64,8 +64,10 @@ export function addPlace(place) {
         description: place.description,
         logo: place.logo,
         category : place.category,
-        lat : place.lat,
-        lng : place.lng,
+        location :{
+            lat : place.lat,
+            lng : place.lng
+        },       
         user : place.user
     }
     let token = localStorage.getItem("token")

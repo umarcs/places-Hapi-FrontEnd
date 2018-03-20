@@ -46,7 +46,6 @@ export default compose(
                 onPlacesChanged: () => {
                     const places = refs.searchBox.getPlaces();
                     // const google = window.google;
-
                     const bounds = new google.maps.LatLngBounds();
 
                     places.forEach(place => {

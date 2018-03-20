@@ -16,7 +16,7 @@ import Footer from './footer'
 // import Places from '../places/placesForm'
 // import Categories from '../categories/categories'
 
-import Map from '../googleMap/map'
+import MapWithAMarkers from '../googleMap/map';
 const pos = {
     position: "sticky"
 }
@@ -32,14 +32,14 @@ class Home extends Component {
                 <div className="row h-100">
                     <div className="col-sm-4 col-2 h-100 py-2 fixed-top" id="left">
                         <div>
-                            <Map
-                                zoom={7}
-                                center={{
-                                    lat: 30.231078,
-                                    lng: 71.456956
-                                }}
-                                containerElement={<div style={{ height: `680px` }} />}
-                                mapElement={<div style={{ height: `100%` }} />} />
+                            <MapWithAMarkers markers={
+                                this.props.place.location
+                                
+                                    ?
+                                    [{ ...this.props.place.location }]
+                                    :
+                                    [{ lat: 30.176157, lng: 71.454048 }]
+                            } />
                         </div>
                     </div>
                     <div className="col offset-2 offset-sm-4 py-2" style={{ marginTop: `50px` }}>
@@ -53,7 +53,8 @@ class Home extends Component {
 }
 
 function mapStateToProps(state) {
-    return { categories: state.category.categories, places: state.places.places };
+    console.log("my place is", state.places.places)
+    return { categories: state.category.categories, place: state.places.place };
 }
 function mapDispathToProps(dispatch) {
     return bindActionCreators({
