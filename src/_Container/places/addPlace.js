@@ -21,7 +21,7 @@ class AddPlace extends React.Component {
     
     handleSubmit(place) {
 
-        console.log('this.state: ', this.state)
+        //console.log('this.state: ', this.state)
         if (this.props.user) {
             place.lat = this.state.lat;
             place.lng = this.state.lng;

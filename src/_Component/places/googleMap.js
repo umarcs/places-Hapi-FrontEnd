@@ -2,6 +2,8 @@
 // const { compose } = require("recompose");
 import React, { Component } from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, } from "react-google-maps";
+const FileInput = require('react-file-input');
+
 const _ = require("lodash");
 const { compose, withProps, lifecycle } = require("recompose");
 const { SearchBox } = require("react-google-maps/lib/components/places/SearchBox");
@@ -40,12 +42,13 @@ export default compose(
                 },
                 handleMarkerChanged: (mapProps) => {
                     let lat = mapProps.latLng.lat();
-                    let lng =  mapProps.latLng.lng();
-                    this.props.setLatLng({lat, lng}) 
+                    let lng = mapProps.latLng.lng();
+                    console.log("ll", lat, lng)
+                    this.props.setLatLng({ lat, lng })
                 },
                 onPlacesChanged: () => {
                     const places = refs.searchBox.getPlaces();
-                     const google = window.google;
+                    const google = window.google;
                     console.log("place changed", places)
 
                     const bounds = new google.maps.LatLngBounds();
@@ -78,7 +81,7 @@ export default compose(
 
     <GoogleMap
         ref={props.onMapMounted}
-        defaultZoom={15}
+        defaultZoom={2}
         center={props.center}
         onBoundsChanged={props.onBoundsChanged}
     >
@@ -107,18 +110,30 @@ export default compose(
                 }}
             />
         </SearchBox>
+        {/* {console.log("initialLatLng>>", props.initialLatLng)} */}
+        {
+            props.initialLatLng
+                ?
+                <Marker
+                    title="Drag it to your on location"
+                    position={props.initialLatLng}
+                    onDragEnd={props.handleMarkerChanged}
+                    onClick={props.handleMarkerChanged}
+                    draggable={true}
+                    animation={2} />
 
-        {props.markers.map((marker, index) =>
-            //   <Marker key={index} position={marker.position} />
-            <Marker
-                key={index}
-                title="Drag it to your on location"
-                position={marker.position}
-                onDragEnd={props.handleMarkerChanged}
-                onClick={props.handleMarkerChanged}
-                draggable={true}
-                animation={2} />
-        )}
+                :
+                props.markers.map((marker, index) =>
+                    //   <Marker key={index} position={marker.position} />
+                    <Marker
+                        key={index}
+                        title="Drag it to your on location"
+                        position={marker.position}
+                        onDragEnd={props.handleMarkerChanged}
+                        onClick={props.handleMarkerChanged}
+                        draggable={true}
+                        animation={2} />
+                )}
     </GoogleMap>
 );
 

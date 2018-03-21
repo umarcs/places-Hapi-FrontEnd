@@ -85,13 +85,17 @@ export function addPlace(place) {
 }
 
 export function updatePlace(place) {
-    //console.log("params>>>>>>>", request.params)
+    console.log("params>>>>>>>", place)
     let token = localStorage.getItem("token")
     const id = place._id
     const updatedData = {
         title: place.title,
         address: place.address,
         //images: place.images,
+        location :{
+            lat : place.lat,
+            lng : place.lng
+        }, 
         description: place.description,
         logo: place.logo,
         category : place.category

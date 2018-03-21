@@ -46,8 +46,12 @@ const validate = values => {
 
 
 const PlacesForm = props => {
-    
+
     const { error, handleSubmit, pristine, reset, submitting, setLatLng } = props
+    console.log("initial vals are", props)
+    let initialLatLng = props.initialValues ? props.initialValues.location : null;
+    console.log("initial vals>>>", initialLatLng)
+
 
     return (
         <div>
@@ -88,7 +92,8 @@ const PlacesForm = props => {
                                 </div>
                                 <div className="row">
                                     <div className="col-md-6">
-                                        <Field name="images" type="text" component={renderField} label="Image" />
+                                        
+                                        <Field name="images" type="file" component={renderField} label="Image" />
                                     </div>
                                     <div className="col-md-6">
                                         <Field
@@ -98,7 +103,7 @@ const PlacesForm = props => {
                                             label="Description" />
                                     </div>
                                 </div>
-                               
+
                                 <div className="row">
                                     <div className="col-md-6">
                                         <Field name="logo" type="text" component={renderField} label="Logo" />
@@ -106,7 +111,7 @@ const PlacesForm = props => {
                                 </div>
                                 <div className="row" style={{ marginTop: '40px' }}>
                                     <div className="col-md-12">
-                                        <GoogleMap setLatLng={setLatLng} />
+                                        <GoogleMap setLatLng={setLatLng} initialLatLng={initialLatLng} />
                                     </div>
                                 </div>
 

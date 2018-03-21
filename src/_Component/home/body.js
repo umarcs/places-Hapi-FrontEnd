@@ -48,12 +48,9 @@ render() {
     let places = [{location:{lat: 30.07154734201247, lng: 69.08144412499996}}];
     if (this.props.location.pathname == '/places-list') {
         places = this.props.places;
-        zoom = 4
-
     } 
     else if (this.props.location.pathname.indexOf('/places/d/') == 0) {
         places = this.props.place ? [this.props.place] : [];
-        zoom = 18
     }
     return (
         <div className="container-fluid h-100">

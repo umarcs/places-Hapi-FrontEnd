@@ -7,27 +7,27 @@ import PlaceForm from '../../_Component/places/placesForm'
 
 
 class Update_Place extends React.Component {
-     constructor() {
-          super();
-     }
-     handleSubmit(place) {
+    constructor() {
+        super();
+        this.state = {
+            lat : null,
+            lng : null
+        }
+    }
+    setLatLng = (latLng) => {
+       this.setState({
+        lat : latLng.lat,
+        lng : latLng.lng
+       })
+    }
+     handleSubmit = place => {
+         console.log("lat lng", this.state.lat,this.state.lng)
+        place.lat = this.state.lat;
+        place.lng = this.state.lng;
         return updatePlace(place)
      }
-     
-     // componentWillReceiveProps(nextProps) {
-     //      if(this.props.places.place && !nextProps.places.place) {
-     //           console.log("next props is<>>>", this.props.places.place )
-     //      //  initialValues this.props.places.place
-     //      // console.log("initialValues", initialValues
-     //      }
-     //  }
 
      componentDidMount() {
-     //     const initialValues = this.props
-     //     console.log("initialValues", initialValues)
-          //  console.log('PLACE MOUNTED:::: >>> ', this.props.location.search)
-          // const rawURL = this.props.location.search;
-          //  query = queryString.parse(rawURL);)
           const id = this.props.match.params.pId
           this.props.getPlace(id)
      }
@@ -39,13 +39,13 @@ class Update_Place extends React.Component {
           }
           return (
                <div>
-                    <PlaceForm onSubmit={this.handleSubmit} initialValues={initVals}  />
+                    <PlaceForm onSubmit={this.handleSubmit}  setLatLng={this.setLatLng}  initialValues={initVals}  />
                </div>
           )
      }
 }
 function mapStateToProps(state) {
-     console.log("initialValues", state.places.place)
+     console.log("initialValues state", state.places)
      return {
          place : state.places.place
      }
