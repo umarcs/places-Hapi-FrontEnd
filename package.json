@@ -48,6 +48,7 @@
     "react-geocode": "0.0.7",
     "react-google-map": "^3.1.1",
     "react-google-maps": "^9.4.5",
+    "react-image-upload": "0.0.1",
     "react-menu-bar": "^2.0.4",
     "react-nested-route": "^1.0.0",
     "react-redux": "^4.4.5",

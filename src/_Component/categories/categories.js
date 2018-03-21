@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
-import {style} from 'typestyle';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { style } from 'typestyle';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
-import {BrowserRouter, Route, Switch, Link, history} from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Link, history } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
-import {getCategories} from '../../_Action/category'
-import {getPlaces} from '../../_Action/place';
+import { getCategories } from '../../_Action/category'
+import { getPlaces } from '../../_Action/place';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
-const div = style({marginTop: '60px'})
+const div = style({ marginTop: '60px' })
 const divStyle = {
     marginTop: "70px"
 }
@@ -24,10 +24,10 @@ class Home extends Component {
                             .map((category, i) => {
                                 return <div className="col-lg-4 col-md-6 mb-4" key={i}>
                                     <div className="card h-100">
-                                        <a href="#"><img className="card-img-top" src="http://placehold.it/700x400" alt/></a>
+                                        <a href="#"><img className="card-img-top" src="http://placehold.it/700x400" alt /></a>
                                         <div className="card-body">
                                             <h4 className="card-title">
-                                                <Link to={`/places-list?c=${category.slug}`}>
+                                                <Link to={`/places?c=${category.slug}`}>
                                                     {category.title}
                                                 </Link>
                                             </h4>
@@ -42,7 +42,7 @@ class Home extends Component {
                                 </div>
                             })
                         : "Categories Not Found"
-}
+                    }
                     {this.props.children}
                 </div>
             </div>
@@ -51,7 +51,7 @@ class Home extends Component {
 }
 
 function mapStateToProps(state) {
-    return {categories: state.category.categories, places: state.places.places};
+    return { categories: state.category.categories, places: state.places.places };
 }
 function mapDispathToProps(dispatch) {
     return bindActionCreators({ getCategories, getPlaces }, dispatch)

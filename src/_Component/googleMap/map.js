@@ -9,7 +9,7 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
     <GoogleMap
         ref={props.onMapMounted}
         defaultZoom={props.zoom}
-    // defaultCenter={props.center}
+ defaultCenter={props.center}
     //defaultCenter={{ lat: 25.0391667, lng: 121.525 }}
     >
         {

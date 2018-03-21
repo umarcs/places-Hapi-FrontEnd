@@ -52,7 +52,7 @@ class App extends Component {
             }
             <Home>
             <Route exact path="/" component={categories} />
-              <Route exact path="/places-list" component={searchPlaces} />
+              <Route exact path="/places" component={searchPlaces} />
               <Route exact path="/places/d/:pId" component={placeDetail} />
             </Home>
           </Switch>
