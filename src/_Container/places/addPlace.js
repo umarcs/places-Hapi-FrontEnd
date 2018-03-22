@@ -23,8 +23,7 @@ class AddPlace extends React.Component {
 
         //console.log('this.state: ', this.state)
         if (this.props.user) {
-            place.lat = this.state.lat;
-            place.lng = this.state.lng;
+            place.location = { lat: this.state.lat, lng: this.state.lng }
             place.user = this.props.user._id;
         }
         return addPlace(place)
