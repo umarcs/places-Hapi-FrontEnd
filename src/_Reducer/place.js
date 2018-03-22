@@ -4,7 +4,7 @@ let initialState = {
     place: null
 }
 export default function (state = initialState, action) {
-    console.log("palceeeee", action.type)
+    console.log("action.payload", action.type, action.payload)
     switch (action.type) {
         case "GET_PLACES":
             return {

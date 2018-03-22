@@ -48,9 +48,9 @@ const validate = values => {
 const PlacesForm = props => {
 
     const { error, handleSubmit, pristine, reset, submitting, setLatLng } = props
-    console.log("initial vals are", props)
+   // console.log("initial vals are", props)
     let initialLatLng = props.initialValues ? props.initialValues.location : null;
-    console.log("initial vals>>>", initialLatLng)
+    //console.log("initial vals>>>", initialLatLng)
 
 
     return (

@@ -1,7 +1,9 @@
+'use strict'
+
 import Request from 'superagent';
 import { SubmissionError } from 'redux-form'
-const queryString = require('query-string');
-//var _ = require('lodash');
+import _ from 'lodash';
+import queryString from 'query-string';
 
 // //import { SubmissionError } from 'redux-form'
 // //import config from '../config';
@@ -58,64 +60,67 @@ export function getPlace(id) {
 }
 export function addPlace(place) {
     console.log("place is>>>", place)
-    const addPlace = {
-        title: place.title,
-        address: place.address,
-        description: place.description,
-        logo: place.logo,
-        category : place.category,
-        location :{
-            lat : place.lat,
-            lng : place.lng
-        },       
-        user : place.user
-    }
+    let plPlace = _.pick(place, ['title', 'address', 'location', 'description', 'logo', 'category', 'user']);
+    // const addPlace = {
+    //     title: place.title,
+    //     address: place.address,
+    //     description: place.description,
+    //     logo: place.logo,
+    //     category: place.category,
+    //     location: {
+    //         lat: place.lat,
+    //         lng: place.lng
+    //     },
+    //     user: place.user
+    // }
     let token = localStorage.getItem("token")
     const url = `${apiBaseUrl}/places`;
-    return Request.post(url).send(addPlace).set({ 'Content-Type': 'application/json', 'Authorization': 'Bearer' + token }).then((response => {
+    return Request.post(url).send(plPlace).set({ 'Authorization': 'Bearer' + token }).then((response => {
         return {
             type: "ADD_PLACE",
-            payload: response.body.places
+            payload: place
         }
     }))
-    .catch((err)=>{
-        const { body} = err.response || {};
-        throw new SubmissionError({_error: body.message })
-    })
+        .catch((err) => {
+            const { body } = err.response || {};
+            throw new SubmissionError({ _error: body.message })
+        })
 }
 
 export function updatePlace(place) {
     console.log("params>>>>>>>", place)
+    let plPlace = _.pick(place, ['title', 'address', 'location', 'description', 'logo', 'category']);
     let token = localStorage.getItem("token")
     const id = place._id
-    const updatedData = {
-        title: place.title,
-        address: place.address,
-        //images: place.images,
-        location :{
-            lat : place.lat,
-            lng : place.lng
-        }, 
-        description: place.description,
-        logo: place.logo,
-        category : place.category
-    }
-    console.log("data of place>>", updatedData)
+    // const updatedData = {
+    //     title: place.title,
+    //     address: place.address,
+    //     //images: place.images,
+    //     // location :{
+    //     //     lat : place.lat,
+    //     //     lng : place.lng
+    //     // }, 
+    //     description: place.description,
+    //     logo: place.logo,
+    //     category : place.category
+    // }
     const url = `${apiBaseUrl}/places/${id}`
-    return Request.put(url).set({ 'Content-Type': 'application/json', 'Authorization': 'Bearer' + token })
-        .send(updatedData).then((Response => {
-            //localStorage.setItem('login', JSON.stringify(Response.body));
-            console.log("data is here $$$$:", Response)
-            //return Response;
+    return Request.put(url)
+        .set({ 'Authorization': 'Bearer' + token })
+        .send(plPlace)
+        .then((response => {
+            //localStorage.setItem('login', JSON.stringify(response.body));
+            console.log("data is here $$$$:", response)
+            //return response;
             return {
                 type: "UPDATE_PLACE",
-                payload: Response.body.place
+                payload: place
             }
 
         }))
-        .catch((err)=>{
-            const { body} = err.response || {};
-            throw new SubmissionError({_error: body.message })
+        .catch((err) => {
+            const { body } = err.response || {};
+            throw new SubmissionError({ _error: body.message })
         })
 
 }

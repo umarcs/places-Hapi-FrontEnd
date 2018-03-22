@@ -2,8 +2,6 @@
 // const { compose } = require("recompose");
 import React, { Component } from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, } from "react-google-maps";
-const FileInput = require('react-file-input');
-
 const _ = require("lodash");
 const { compose, withProps, lifecycle } = require("recompose");
 const { SearchBox } = require("react-google-maps/lib/components/places/SearchBox");
