@@ -46,17 +46,46 @@ export function getPlacesOfOneUser(id) {
     }))
 }
 
+
+function getPlaceInit() {
+    console.log('Dispatching: ', 'getPlace')
+    return {
+        type: "GET_PLACE"
+    }
+}
+function getPlaceSuccess(response) {
+    console.log('Dispatching: ', 'getPlaceSuccess')
+    return {
+        type: "GET_PLACE_SUCCESS",
+        payload: response.body.place
+    }
+}
+function getPlaceFail(body) {
+    console.log('Dispatching: ', 'getPlaceFail')
+    return {
+        type: "GET_PLACE_FAIL",
+        payload: body.message
+    }
+}
 export function getPlace(id) {
     // console.log("query is>>>>>", query)
     // const queryParam = queryString.stringify(query);
-    const url = `${apiBaseUrl}/places/${id}`;
-    return Request.get(url).then((response => {
-        console.log('response: ', response)
-        return {
-            type: "GET_PLACE",
-            payload: response.body.place
+
+    return dispatch => {
+        dispatch(getPlaceInit())
+    
+        const url = `${apiBaseUrl}/places/${id}`;
+    
+        return Request.get(url)
+            .then(response => {
+                console.log('response: ', response)
+                dispatch(getPlaceSuccess(response))
+            })
+            .catch(err => {
+                const { body } = err.response || {}
+                dispatch(getPlaceFail(body))
+            })
         }
-    }))
 }
 export function addPlace(place) {
     console.log("place is>>>", place)
@@ -73,6 +102,7 @@ export function addPlace(place) {
     //     },
     //     user: place.user
     // }
+    
     let token = localStorage.getItem("token")
     const url = `${apiBaseUrl}/places`;
     return Request.post(url).send(plPlace).set({ 'Authorization': 'Bearer' + token }).then((response => {
