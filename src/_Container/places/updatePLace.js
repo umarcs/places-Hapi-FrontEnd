@@ -15,6 +15,7 @@ class Update_Place extends React.Component {
         }
     }
     setLatLng = (latLng) => {
+        console.log("np>",latLng)
         this.setState({ ...latLng })
 
     }
@@ -28,6 +29,16 @@ class Update_Place extends React.Component {
      componentDidMount() {
           const id = this.props.match.params.pId
           this.props.getPlace(id)
+     }
+     componentWillReceiveProps(nextProps){
+        console.log("componentDidMount",nextProps)
+
+        nextProps.place
+        ?
+        this.setState({ ...nextProps.place.location })
+        :
+        ''
+
      }
 
     render() {

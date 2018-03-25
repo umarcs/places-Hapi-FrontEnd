@@ -46,7 +46,7 @@ export function getPlacesOfOneUser(id) {
     }))
 }
 
-
+// get single place
 function getPlaceInit() {
     console.log('Dispatching: ', 'getPlace')
     return {
@@ -68,9 +68,6 @@ function getPlaceFail(body) {
     }
 }
 export function getPlace(id) {
-    // console.log("query is>>>>>", query)
-    // const queryParam = queryString.stringify(query);
-
     return dispatch => {
         dispatch(getPlaceInit())
     
@@ -89,20 +86,7 @@ export function getPlace(id) {
 }
 export function addPlace(place) {
     console.log("place is>>>", place)
-    let plPlace = _.pick(place, ['title', 'address', 'location', 'description', 'logo', 'category', 'user']);
-    // const addPlace = {
-    //     title: place.title,
-    //     address: place.address,
-    //     description: place.description,
-    //     logo: place.logo,
-    //     category: place.category,
-    //     location: {
-    //         lat: place.lat,
-    //         lng: place.lng
-    //     },
-    //     user: place.user
-    // }
-    
+    let plPlace = _.pick(place, ['title', 'address', 'location', 'description', 'logo', 'category', 'user']);   
     let token = localStorage.getItem("token")
     const url = `${apiBaseUrl}/places`;
     return Request.post(url).send(plPlace).set({ 'Authorization': 'Bearer' + token }).then((response => {
@@ -122,18 +106,6 @@ export function updatePlace(place) {
     let plPlace = _.pick(place, ['title', 'address', 'location', 'description', 'logo', 'category']);
     let token = localStorage.getItem("token")
     const id = place._id
-    // const updatedData = {
-    //     title: place.title,
-    //     address: place.address,
-    //     //images: place.images,
-    //     // location :{
-    //     //     lat : place.lat,
-    //     //     lng : place.lng
-    //     // }, 
-    //     description: place.description,
-    //     logo: place.logo,
-    //     category : place.category
-    // }
     const url = `${apiBaseUrl}/places/${id}`
     return Request.put(url)
         .set({ 'Authorization': 'Bearer' + token })

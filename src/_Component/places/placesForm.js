@@ -14,6 +14,7 @@ const errorColor = {
 }
 
 const validate = values => {
+    console.log("vals>>>>>",values)
     const errors = {}
     const requiredFields = ['category']
     if (!values.category) {
@@ -25,9 +26,7 @@ const validate = values => {
     if (!values.title) {
         errors.title = 'Required'
     }
-    if (!values.lng) {
-        errors.lng = 'Required'
-    }
+  
     if (!values.address) {
         errors.address = 'Required'
     }
@@ -48,7 +47,7 @@ const validate = values => {
 const PlacesForm = props => {
 
     const { error, handleSubmit, pristine, reset, submitting, setLatLng } = props
-   // console.log("initial vals are", props)
+   console.log("setLatLng", setLatLng)
     let initialLatLng = props.initialValues ? props.initialValues.location : null;
     //console.log("initial vals>>>", initialLatLng)
 
@@ -124,7 +123,7 @@ const PlacesForm = props => {
                                 <div className="col-md-8">
                                     <div className="row">
                                         <div className="col-md-2">
-                                            <button className="btn btn-success" type="submit" disabled={pristine || submitting}>Update</button>
+                                            <button className="btn btn-success" type="submit" disabled={submitting}>Update</button>
                                         </div>
                                         <div className="col-md-2">
                                             <button
