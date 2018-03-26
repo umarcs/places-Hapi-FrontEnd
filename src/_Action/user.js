@@ -59,10 +59,10 @@ export function update(user) {
         .send(plUser)
         .then(resp => {
             console.log("plUser", plUser)
-            if (user.profilePicture) {
+            if (!(user.profilePicture==resp.body.profilePicture)) {
 
                 const formData = new FormData();
-                formData.append('file', user.profilePicture[0])
+                formData.append('file', user.profilePicture)
                 let url = `${apiBaseUrl}/user/uploads/${id}`
                 Request
                     .post(url)
@@ -76,7 +76,12 @@ export function update(user) {
                             payload: resp.body
                         }
                     })
-               
+            }
+            else{
+                return {
+                    type: "UPDATE_USER",
+                    payload: resp.body
+                }
             }
         })
 
