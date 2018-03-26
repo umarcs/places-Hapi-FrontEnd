@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 class Profile extends React.Component {
     render() {
-        let  userProfile= this.props.user.image;
+        let  userProfile= this.props.user.profilePicture;
         const baseURL = `http://localhost:3006/users/${userProfile}`;
 
         return (

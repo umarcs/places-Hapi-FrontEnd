@@ -40,6 +40,9 @@ class Places extends Component {
             .getPlaces(params)
     }
     render() {
+
+   // let  userProfile= this.props.place.placeImage;
+        const baseURL = `http://localhost:3006/place`;
         return (
             <div>
                 {this.props.places
@@ -50,7 +53,12 @@ class Places extends Component {
                                     <div className="col-xs-12 col-md-8">
                                         <div className="media">
                                             <Link to={`/places/d/${place._id}`} className="pull-left">
-                                                <img src={require('./img/tahir.jpeg')} style={{ marginBottom: '12px' }} className="media-object" alt="Sample Image" />
+                                                <img src={`http://localhost:3006/places/${place.placeImage}`}
+                                                height= "243px"
+                                                width= "230px"
+                                                 style={{ marginBottom: '12px' }}
+                                                  className="media-object" 
+                                                  alt="Sample Image" />
                                             </Link>
                                             <div className="media-body" style={{ marginLeft: '15px' }}>
                                                 <h4 className="card-title">
