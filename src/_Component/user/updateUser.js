@@ -1,8 +1,8 @@
 import React from 'react';
-import {bindActionCreators} from "redux";
-import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {Field, reduxForm} from 'redux-form';
+import { bindActionCreators } from "redux";
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
 import FlatButton from 'material-ui/FlatButton';
 
 //import submit from '../../container/user-form//updateUser';
@@ -23,18 +23,38 @@ const validate = values => {
   }
   return errors
 }
-const renderField = ({ input, label, type, meta: { touched, error }}) => (
+const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div>
-    <br/>
+    <br />
     <label>{label}</label>
     <div>
-      <input {...input} className="form-control" placeholder={label} type={type}/> {touched && error && <span style={errorColor}>{error}</span>}
+      <input {...input} className="form-control" placeholder={label} type={type} /> {touched && error && <span style={errorColor}>{error}</span>}
     </div>
   </div>
 )
+const adaptFileEventToValue = delegate =>
+  e => delegate(e.target.files[0])
+
+const FileInput = ({
+  input: {
+    value: omitValue,
+    onChange,
+    onBlur,
+    ...inputProps,
+  },
+  meta: omitMeta,
+  ...props,
+}) =>
+  <input
+    onChange={adaptFileEventToValue(onChange)}
+    onBlur={adaptFileEventToValue(onBlur)}
+    type="file"
+    {...inputProps}
+    {...props}
+  />
 
 let UpdateUserForm = props => {
-  const {error, handleSubmit, pristine, reset, submitting} = props
+  const { error, handleSubmit, pristine, reset, submitting } = props
   return (
     <div>
       <div className="container containerWidth">
@@ -43,23 +63,24 @@ let UpdateUserForm = props => {
             <div className="card bg-faded card-block">
               <h3>Update Your Data</h3>
             </div>
-            <br/>
+            <br />
             <div className="card bg-faded card-block">
               <form onSubmit={handleSubmit}>
                 <div className="row">
                   <div className="col-md-6">
-                    <Field name="firstName" type="text" component={renderField} label="First Name"/>
+                    <Field name="firstName" type="text" component={renderField} label="First Name" />
                   </div>
                   <div className="col-md-6">
-                    <Field name="lastName" type="text" component={renderField} label="Last Name"/>
+                    <Field name="lastName" type="text" component={renderField} label="Last Name" />
                   </div>
                 </div>
                 <div className="row">
                   <div className="col-md-12">
-                  <Field name="image" type="file" component={renderField} label="Image" />
+                    <Field name="profilePicture"  component={FileInput}
+                      label="Image" />
                   </div>
                 </div>
-                <br/>
+                <br />
                 <div className="col-md-9">
                   <div className="row">
                     <div className="col-md-2">
@@ -91,11 +112,11 @@ let UpdateUserForm = props => {
 };
 
 function mapStateProps(state) {
-  return {users: state.user.login, initialValues: state.user.login}
+  return { users: state.user.login, initialValues: state.user.login }
 
 }
 function matchDispatchToProps(dispatch) {
   return bindActionCreators({}, dispatch)
 }
-UpdateUserForm = reduxForm({form: "Update Form", validate, enableReinitialize: true})(UpdateUserForm)
+UpdateUserForm = reduxForm({ form: "Update Form", validate, enableReinitialize: true })(UpdateUserForm)
 export default connect(mapStateProps, matchDispatchToProps)(UpdateUserForm);

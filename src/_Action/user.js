@@ -47,36 +47,45 @@ export function update(user) {
     const {_id: id} = user;
     let token = localStorage.getItem("token")
     let plUser = _.pick(user, ['firstName', 'lastName']);
-    
+    let userProfile_Pic =  user.profilePicture;
+    let userProfile_Pic_name =  user.profilePicture.name;
+
     console.log("user ", user)
     
     const url = `${apiBaseUrl}/user/${id}`
     return Request
         .put(url)
-        .set({ 'Authorization': 'Bearer' + token })
+        .set({ 'Authorization': 'Bearer ' + token })
         .send(plUser)
         .then(resp => {
+            console.log("res", resp)
+            if (resp.body.profilePicture == user.profilePicture) {
+                console.log("in if", user.profilePicture)
+                return {
+                    type: "UPDATE_USER",
+                    payload: resp.body
+                }
+            }
+            else {
+                console.log("in else", user.profilePicture.name)
 
-            if (user.image) {
                 const formData = new FormData();
-                formData.append('file', user.image[0], user.image[0].name)
+                formData.append('file', userProfile_Pic)
 
                 let url = `http://localhost:2002/api/user/uploads/${id}`
                 Request
                     .post(url)
+                    .set({ 'Authorization': 'Bearer ' + token })
                     .send(formData)
                     .then(resp => {
+                        console.log("in else resp", resp)
+
                         return {
                             type: "UPDATE_USER",
                             payload: resp.body
                         }
                     })
-            }
-            else {
-                return {
-                    type: "UPDATE_USER",
-                    payload: resp.body
-                }
+               
             }
         })
 
