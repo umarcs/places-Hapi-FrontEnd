@@ -14,7 +14,7 @@ const errorColor = {
 }
 
 const validate = values => {
-    console.log("vals>>>>>",values)
+    console.log("vals>>>>>", values)
     const errors = {}
     const requiredFields = ['category']
     if (!values.category) {
@@ -26,7 +26,7 @@ const validate = values => {
     if (!values.title) {
         errors.title = 'Required'
     }
-  
+
     if (!values.address) {
         errors.address = 'Required'
     }
@@ -43,11 +43,32 @@ const validate = values => {
     return errors
 }
 
+const adaptFileEventToValue = delegate =>
+    e => delegate(e.target.files[0])
+
+const FileInput = ({
+  input: {
+    value: omitValue,
+    onChange,
+    onBlur,
+    ...inputProps,
+  },
+    meta: omitMeta,
+    ...props,
+}) =>
+    <input
+        onChange={adaptFileEventToValue(onChange)}
+        onBlur={adaptFileEventToValue(onBlur)}
+        type="file"
+        {...inputProps}
+        {...props}
+    />
+
 
 const PlacesForm = props => {
 
     const { error, handleSubmit, pristine, reset, submitting, setLatLng } = props
-   console.log("setLatLng", setLatLng)
+    console.log("setLatLng", setLatLng)
     let initialLatLng = props.initialValues ? props.initialValues.location : null;
     //console.log("initial vals>>>", initialLatLng)
 
@@ -91,7 +112,7 @@ const PlacesForm = props => {
                                 </div>
                                 <div className="row">
                                     <div className="col-md-6">
-                                        <Field name="images" type="file" component={renderField} label="Image" />
+                                        <Field name="placeImage" component={FileInput} label="Image" />
                                     </div>
                                     <div className="col-md-6">
                                         <Field

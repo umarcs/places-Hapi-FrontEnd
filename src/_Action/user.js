@@ -43,8 +43,8 @@ export function login(user) {
 }
 
 export function update(user) {
-    
-    const {_id: id} = user;
+    console.log("user ", user)
+    const { _id: id } = user;
     let token = localStorage.getItem("token")
     let plUser = _.pick(user, ['firstName', 'lastName']);
     let userProfile_Pic =  user.profilePicture;
@@ -58,24 +58,15 @@ export function update(user) {
         .set({ 'Authorization': 'Bearer ' + token })
         .send(plUser)
         .then(resp => {
-            console.log("res", resp)
-            if (resp.body.profilePicture == user.profilePicture) {
-                console.log("in if", user.profilePicture)
-                return {
-                    type: "UPDATE_USER",
-                    payload: resp.body
-                }
-            }
-            else {
-                console.log("in else", user.profilePicture.name)
+            console.log("plUser", plUser)
+            if (user.profilePicture) {
 
                 const formData = new FormData();
-                formData.append('file', userProfile_Pic)
-
-                let url = `http://localhost:2002/api/user/uploads/${id}`
+                formData.append('file', user.profilePicture[0])
+                let url = `${apiBaseUrl}/user/uploads/${id}`
                 Request
                     .post(url)
-                    .set({ 'Authorization': 'Bearer ' + token })
+                    .set({ 'Authorization': 'Bearer' + token })
                     .send(formData)
                     .then(resp => {
                         console.log("in else resp", resp)
@@ -90,6 +81,7 @@ export function update(user) {
         })
 
 }
+
 //----------get user data through token----------
 export function getUserDataByToken() {
     let token = localStorage.getItem('token')
@@ -115,9 +107,3 @@ export function Logout() {
         type: "LOG_OUT"
     }
 }
-
-
-
-
-
-
