@@ -54,6 +54,11 @@ let UpdateUserForm = props => {
                     <Field name="lastName" type="text" component={renderField} label="Last Name"/>
                   </div>
                 </div>
+                <div className="row">
+                  <div className="col-md-12">
+                  <Field name="image" type="file" component={renderField} label="Image" />
+                  </div>
+                </div>
                 <br/>
                 <div className="col-md-9">
                   <div className="row">

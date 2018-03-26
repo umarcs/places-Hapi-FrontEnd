@@ -43,20 +43,42 @@ export function login(user) {
 }
 
 export function update(user) {
+    
+    const {_id: id} = user;
     let token = localStorage.getItem("token")
-    const id = user._id
     let plUser = _.pick(user, ['firstName', 'lastName']);
+    
     console.log("user ", user)
+    
     const url = `${apiBaseUrl}/user/${id}`
-    return Request.put(url).set({ 'Authorization': 'Bearer' + token })
-        .send(plUser).then((Response => {
-            console.log("user is here:", Response.body)
-            return {
-                type: "UPDATE_USER",
-                payload: Response.body
-            }
+    return Request
+        .put(url)
+        .set({ 'Authorization': 'Bearer' + token })
+        .send(plUser)
+        .then(resp => {
 
-        }))
+            if (user.image) {
+                const formData = new FormData();
+                formData.append('file', user.image[0], user.image[0].name)
+
+                let url = `http://localhost:2002/api/user/uploads/${id}`
+                Request
+                    .post(url)
+                    .send(formData)
+                    .then(resp => {
+                        return {
+                            type: "UPDATE_USER",
+                            payload: resp.body
+                        }
+                    })
+            }
+            else {
+                return {
+                    type: "UPDATE_USER",
+                    payload: resp.body
+                }
+            }
+        })
 
 }
 //----------get user data through token----------

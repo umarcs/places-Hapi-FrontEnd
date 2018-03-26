@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 
 class Profile extends React.Component {
     render() {
+        let  userProfile= this.props.user.image;
+        const baseURL = `http://localhost:3006/users/${userProfile}`;
+
         return (
             <div id="user-profile-2" className="user-profile">
                 <div className="tabbable">
@@ -17,14 +20,13 @@ class Profile extends React.Component {
                                         <img
                                             className="editable img-responsive"
                                             alt=" Avatar"
+                                            height="243px"
+                                            width = "230px"
                                             id="avatar2"
-                                            src="http://bootdey.com/img/Content/avatar/avatar6.png" />
+                                            src = {baseURL}/>
                                     </span>
                                     <div className="space space-4" />
-                                    <a href="" className="btn btn-sm btn-block btn-success">
-                                        <i className="ace-icon fa fa-plus-circle bigger-120" />
-                                        <span className="bigger-110">Add picture</span>
-                                    </a>
+                                    
 
                                 </div>
                                 <div className="col-xs-12 col-sm-9">
@@ -38,7 +40,7 @@ class Profile extends React.Component {
                                                 First Name
                                             </div>
                                             <div className="profile-info-value">
-                                                <span>{this.props.users.firstName}</span>
+                                                <span>{this.props.user.firstName}</span>
                                             </div>
                                         </div>
                                         <div className="profile-info-row">
@@ -46,14 +48,14 @@ class Profile extends React.Component {
                                                 Last Name</div>
                                             <div className="profile-info-value">
                                                 <i className=" light-orange bigger-110" />
-                                                <span>{this.props.users.lastName}</span>
+                                                <span>{this.props.user.lastName}</span>
                                             </div>
                                         </div>
                                         <div className="profile-info-row">
                                             <div className="profile-info-name">Email
                                             </div>
                                             <div className="profile-info-value">
-                                                <span>{this.props.users.email}</span>
+                                                <span>{this.props.user.email}</span>
                                             </div>
                                         </div>
                                         <div className="profile-info-row">
@@ -81,7 +83,7 @@ class Profile extends React.Component {
     }
 }
 function mapStateProps(state) {
-    return { users: state.user.login }
+    return { user: state.user.login }
 
 }
 function mapDispathToProps(dispatch) {

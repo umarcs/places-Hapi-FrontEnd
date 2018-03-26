@@ -91,7 +91,6 @@ const PlacesForm = props => {
                                 </div>
                                 <div className="row">
                                     <div className="col-md-6">
-                                        
                                         <Field name="images" type="file" component={renderField} label="Image" />
                                     </div>
                                     <div className="col-md-6">
