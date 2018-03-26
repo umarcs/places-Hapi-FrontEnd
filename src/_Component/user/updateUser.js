@@ -54,6 +54,8 @@ const FileInput = ({
   />
 
 let UpdateUserForm = props => {
+  let userProfile = props.user.profilePicture;
+  const baseURL = `http://localhost:3006/users/${userProfile}`;
   const { error, handleSubmit, pristine, reset, submitting } = props
   return (
     <div>
@@ -69,16 +71,20 @@ let UpdateUserForm = props => {
                 <div className="row">
                   <div className="col-md-6">
                     <Field name="firstName" type="text" component={renderField} label="First Name" />
-                  </div>
-                  <div className="col-md-6">
                     <Field name="lastName" type="text" component={renderField} label="Last Name" />
                   </div>
                 </div>
-                <div className="row">
-                  <div className="col-md-12">
-                    <Field name="profilePicture"  component={FileInput}
-                      label="Image" />
+                  <div className="col-md-6">
+                    <img
+                      className="editable img-responsive"
+                      alt=" Avatar"
+                      height="243px"
+                      width="230px"
+                      id="avatar2"
+                      src={baseURL} />
                   </div>
+                  <div className="col-md-3">
+                    <Field name="profilePicture" component={FileInput} label="Image" />
                 </div>
                 <br />
                 <div className="col-md-9">
@@ -107,12 +113,12 @@ let UpdateUserForm = props => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 };
 
 function mapStateProps(state) {
-  return { users: state.user.login, initialValues: state.user.login }
+  return { user: state.user.login, initialValues: state.user.login }
 
 }
 function matchDispatchToProps(dispatch) {

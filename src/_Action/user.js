@@ -58,7 +58,7 @@ export function update(user) {
         .set({ 'Authorization': 'Bearer ' + token })
         .send(plUser)
         .then(resp => {
-            console.log("plUser", plUser)
+
             if (!(user.profilePicture==resp.body.profilePicture)) {
 
                 const formData = new FormData();
@@ -78,6 +78,7 @@ export function update(user) {
                     })
             }
             else{
+
                 return {
                     type: "UPDATE_USER",
                     payload: resp.body

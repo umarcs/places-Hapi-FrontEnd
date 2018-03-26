@@ -47,12 +47,12 @@ const adaptFileEventToValue = delegate =>
     e => delegate(e.target.files[0])
 
 const FileInput = ({
-  input: {
-    value: omitValue,
-    onChange,
-    onBlur,
-    ...inputProps,
-  },
+    input: {
+        value: omitValue,
+        onChange,
+        onBlur,
+        ...inputProps,
+    },
     meta: omitMeta,
     ...props,
 }) =>
@@ -68,10 +68,11 @@ const FileInput = ({
 const PlacesForm = props => {
 
     const { error, handleSubmit, pristine, reset, submitting, setLatLng } = props
-    console.log("setLatLng", setLatLng)
     let initialLatLng = props.initialValues ? props.initialValues.location : null;
-    //console.log("initial vals>>>", initialLatLng)
+    let  placeImage =  props.place ? props.place.placeImage : null;
+    console.log("placeImage", placeImage)
 
+    const baseURL = `http://localhost:3006/places/${placeImage}`;
 
     return (
         <div>
@@ -112,6 +113,13 @@ const PlacesForm = props => {
                                 </div>
                                 <div className="row">
                                     <div className="col-md-6">
+                                        <img
+                                            className="editable img-responsive"
+                                            alt=" Avatar"
+                                            height="243px"
+                                            width="230px"
+                                            id="avatar2"
+                                            src={baseURL} />
                                         <Field name="placeImage" component={FileInput} label="Image" />
                                     </div>
                                     <div className="col-md-6">
@@ -191,7 +199,8 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 )
 
 function mapStateToProps(state) {
-    return { categories: state.category.categories };
+
+    return { categories: state.category.categories ,  place: state.places.place};
 }
 
 const UpdatePlace = reduxForm({

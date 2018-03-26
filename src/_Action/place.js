@@ -136,12 +136,31 @@ export function updatePlace(place) {
         .set({ 'Authorization': 'Bearer' + token })
         .send(plPlace)
         .then((response => {
-            //localStorage.setItem('login', JSON.stringify(response.body));
-            console.log("data is here $$$$:", response)
-            //return response;
-            return {
-                type: "UPDATE_PLACE",
-                payload: place
+            console.log("in res ", response)
+
+            if (!(place.placeImage == response.body.place.placeImage)) {
+
+                const formData = new FormData();
+                formData.append('file', place.placeImage)
+                let url = `${apiBaseUrl}/place/uploads/${id}`
+                Request
+                    .post(url)
+                    //.set({ 'Authorization': 'Bearer' + token })
+                    .send(formData)
+                    .then(response => {
+                        return {
+                            type: "UPDATE_PLACE",
+                            payload: response
+                        }
+                    })
+            }
+            else {
+                console.log("in else ")
+
+                return {
+                    type: "UPDATE_PLACE",
+                    payload: response
+                }
             }
 
         }))
