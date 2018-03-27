@@ -12,7 +12,15 @@ class Place_Detail extends Component {
         const {params} = this.props.match;
         this.props.getPlace(params.pId)
     }
+
     render() {
+        const place = this.props.place;
+        console.log('place: place: ', place)
+        if (!place) {
+            return (
+                <div>loading...</div>
+            )
+        }
         return (
             <div className="col-lg-8">
                 <div className="row">
@@ -20,18 +28,18 @@ class Place_Detail extends Component {
                         <a href="">
                             <img
                                 className="img-fluid rounded mb-3 mb-md-0"
-                                src="http://placehold.it/700x300"
-                                alt/>
+                                src={`http://localhost:3006/places/${this.props.place.placeImage}`}                                alt/>
                         </a>
                     </div>
                     <div className="col-md-6">
-                        <h3>{this.props.place.title}</h3>
-                        <p>{this.props.place.description}</p>
+                        <h3>{place.title}</h3>
+                        <p>{place.description}</p>
                         <a className="btn btn-primary">View Location</a>
                     </div>
                 </div>
             </div>
         )
+       
     }
 }
 

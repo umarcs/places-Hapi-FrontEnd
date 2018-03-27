@@ -3,13 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "PORT=3006 react-scripts start",
+    "start": "PORT=3006 react-scripts start ",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+
+
+
+
+    "test": "react-scripts test --env=jsdom ",
+
     "eject": "react-scripts eject"
   },
   "dependencies": {
     "autoprefixer": "^6.0.3",
+    "axios": "^0.18.0",
     "babel-core": "^6.10.4",
     "babel-eslint": "^4.1.6",
     "babel-jscs": "^2.0.5",
@@ -45,8 +51,10 @@
     "react-addons-test-utils": "^15.1.0",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^15.1.0",
+    "react-geocode": "0.0.7",
     "react-google-map": "^3.1.1",
     "react-google-maps": "^9.4.5",
+    "react-image-upload": "0.0.1",
     "react-menu-bar": "^2.0.4",
     "react-nested-route": "^1.0.0",
     "react-redux": "^4.4.5",
@@ -55,6 +63,7 @@
     "react-scripts": "1.1.1",
     "react-transform-hmr": "^1.0.0",
     "react-widgets": "^4.2.2",
+    "recompose": "^0.26.0",
     "redux": "^3.5.2",
     "redux-devtools-extension": "^2.13.2",
     "redux-form": "^7.2.0",

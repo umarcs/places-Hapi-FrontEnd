@@ -7,45 +7,55 @@ import PlaceForm from '../../_Component/places/placesForm'
 
 
 class Update_Place extends React.Component {
-     constructor() {
-          super();
+    constructor() {
+        super();
+        this.state = {
+            lat : null,
+            lng : null
+        }
+    }
+    setLatLng = (latLng) => {
+        console.log("np>",latLng)
+        this.setState({ ...latLng })
+
+    }
+     handleSubmit = place => {
+        place.location = { lat: this.state.lat, lng: this.state.lng }
+        console.log("place is here", place)
+
+        this.props.updatePlace(place)
      }
-     handleSubmit(place) {
-        return updatePlace(place)
-     }
-     
-     // componentWillReceiveProps(nextProps) {
-     //      if(this.props.places.place && !nextProps.places.place) {
-     //           console.log("next props is<>>>", this.props.places.place )
-     //      //  initialValues this.props.places.place
-     //      // console.log("initialValues", initialValues
-     //      }
-     //  }
 
      componentDidMount() {
-     //     const initialValues = this.props
-     //     console.log("initialValues", initialValues)
-          //  console.log('PLACE MOUNTED:::: >>> ', this.props.location.search)
-          // const rawURL = this.props.location.search;
-          //  query = queryString.parse(rawURL);)
           const id = this.props.match.params.pId
-          this.props.getPlace(id)
+          return this.props.getPlace(id)
+     }
+     componentWillReceiveProps(nextProps){
+        console.log("componentDidMount",nextProps)
+
+        if (nextProps.place) {
+            this.setState({ ...nextProps.place.location })
+        }
+
      }
 
-     render() {
-          let initVals = {}
-          if (this.props.place) {
-               initVals = this.props.place
-          }
-          return (
-               <div>
-                    <PlaceForm onSubmit={this.handleSubmit} initialValues={initVals}  />
-               </div>
-          )
-     }
+    render() {
+        const { loading, place } = this.props;    
+        const initVals = place ? place : {}
+          
+
+        console.log("initVals: ", initVals)
+
+        return (
+            <div>
+                {loading && <div>Loading....</div>}
+                <PlaceForm onSubmit={this.handleSubmit.bind(this)}  setLatLng={this.setLatLng}  initialValues={initVals}  />
+            </div>
+        )
+    }
 }
 function mapStateToProps(state) {
-     console.log("initialValues", state.places.place)
+     console.log("mapStateToProps >>>>>>>>>>>>>>  ", state.places)
      return {
          place : state.places.place
      }

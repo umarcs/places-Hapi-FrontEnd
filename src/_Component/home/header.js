@@ -76,7 +76,7 @@ class View extends Component {
 
                             <ul className="navbar-nav ml-auto">
                                 <div className="dropdown">
-                                    <Link to={this.state.selectCat ? `/places-list?c=${this.state.selectCat}` : ""}>
+                                    <Link to={this.state.selectCat ? `/places?c=${this.state.selectCat}` : ""}>
                                         <select
                                             className="btn btn-secondary dropdown-toggle"
                                             name="selectCat"
@@ -88,7 +88,7 @@ class View extends Component {
                                                 .props
                                                 .categories
                                                 .map((data, id) => {
-                                                    return <option value={data._id} key={id}>{data.title}</option>
+                                                    return <option value={data.slug} key={id}>{data.title}</option>
                                                 })
                                             }
                                         </select>
