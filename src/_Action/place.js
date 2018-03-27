@@ -1,10 +1,11 @@
 'use strict'
 
 import Request from 'superagent';
+import  Axios from 'axios';
+
 import { SubmissionError } from 'redux-form'
 import _ from 'lodash';
 import queryString from 'query-string';
-
 // //import { SubmissionError } from 'redux-form'
 // //import config from '../config';
 let apiBaseUrl = 'http://localhost:2002/api';
@@ -126,49 +127,104 @@ export function addPlace(place) {
         })
 }
 
+function updatePlaceInit() {
+
+    console.log('Dispatching: ', "updatePlaceInit")
+    return {
+        type: "UPDATE_PLACE"
+    }
+}
+function updatePlaceSuccess(response) {
+    console.log('Dispatching: ', 'updatePlaceSuccess')
+    return {
+        type: "UPDATE_PLACE_SUCCESS",
+        payload: response.body.place
+    }
+}
+function updatePlaceFail(body) {
+    console.log('Dispatching: ', 'updatePlaceFail')
+    return {
+        type: "UPDATE_PLACE_FAIL",
+        payload: body.message
+    }
+}
+
 export function updatePlace(place) {
-    console.log("params>>>>>>>", place)
-    let plPlace = _.pick(place, ['title', 'address', 'location', 'description', 'logo', 'category']);
-    let token = localStorage.getItem("token")
-    const id = place._id
-    const url = `${apiBaseUrl}/places/${id}`
-    return Request.put(url)
-        .set({ 'Authorization': 'Bearer' + token })
-        .send(plPlace)
-        .then((response => {
-            console.log("in res ", response)
+    alert('before')
+    return dispatch => {
+        alert('after')
+        dispatch(updatePlaceInit())
 
-            if (!(place.placeImage == response.body.place.placeImage)) {
+        console.log(">>>params>>>>>>>", place)
 
-                const formData = new FormData();
-                formData.append('file', place.placeImage)
-                let url = `${apiBaseUrl}/place/uploads/${id}`
-                Request
-                    .post(url)
-                    //.set({ 'Authorization': 'Bearer' + token })
-                    .send(formData)
-                    .then(response => {
-                        return {
-                            type: "UPDATE_PLACE",
-                            payload: response
-                        }
-                    })
-            }
-            else {
-                console.log("in else ")
+        let plPlace = _.pick(place, ['title', 'address', 'location', 'description', 'logo', 'category']);
+        let token = localStorage.getItem("token")
+        const id = place._id
+        const url = `${apiBaseUrl}/places/${id}`;
+        return Request.put(url)
+            .set({ 'Authorization': 'Bearer' + token })
+            .send(plPlace)
+            .then((response => {
 
-                return {
-                    type: "UPDATE_PLACE",
-                    payload: response
+                console.log("in res ", response)
+
+                if (!(place.placeImage == response.body.place.placeImage)) {
+                    console.log("in if")
+
+                    const formData = new FormData();
+                    formData.append('file', place.placeImage)
+                    let url = `${apiBaseUrl}/place/uploads/${id}`;
+                    alert('after ')
+                              
+                    const config = {
+                        headers: { 'content-type': 'multipart/form-data' }
+                    }
+                    Axios.post(url, formData, config)
+                        .then(function(response) {
+                            console.log(response);
+                            alert("fff")
+                        })
+                        .catch(function(error) {
+                            console.log(error);
+                            //
+                        });
+                    // Request
+                    //     .post(url)
+                    //     //.set({ 'Authorization': 'Bearer' + token })
+                    //     .send(formData)
+                    //     .then(response => {
+
+                    //         console.log('response:>>> ', response.body)
+                    //         alert('befor image dispatch')
+                    //         dispatch(updatePlaceSuccess(response))
+                    //     })
+                        // .on('progress', e => {
+                        //     console.log('Percentage done: ', e.percent);
+                        //     alert('in progres')
+                        //     alert('>>', e.percent)
+                        //  })
+                        //  .end(res =>{
+                        //      alert('in res')
+                        //      alert(JSON.stringify(res.body))
+                        //    if (res.ok) {
+                        //      alert('yay got ' + JSON.stringify(res.body));
+                        //    } else {
+                        //      alert('Oh no! error ' + res.text);
+                        //    }
+                        //  })
                 }
-            }
+                else {
 
-        }))
-        .catch((err) => {
-            const { body } = err.response || {};
-            throw new SubmissionError({ _error: body.message })
-        })
+                    console.log("in else ")
+                    dispatch(updatePlaceSuccess(response))
+                }
 
+            }))
+            .catch(err => {
+                const { body } = err.response || {}
+                dispatch(updatePlaceFail(body))
+            })
+    }
 }
 
 

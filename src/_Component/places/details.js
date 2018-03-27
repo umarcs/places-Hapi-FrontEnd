@@ -28,8 +28,7 @@ class Place_Detail extends Component {
                         <a href="">
                             <img
                                 className="img-fluid rounded mb-3 mb-md-0"
-                                src="http://placehold.it/700x300"
-                                alt/>
+                                src={`http://localhost:3006/places/${this.props.place.placeImage}`}                                alt/>
                         </a>
                     </div>
                     <div className="col-md-6">

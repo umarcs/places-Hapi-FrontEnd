@@ -23,21 +23,19 @@ class Update_Place extends React.Component {
         place.location = { lat: this.state.lat, lng: this.state.lng }
         console.log("place is here", place)
 
-        return updatePlace(place)
+        this.props.updatePlace(place)
      }
 
      componentDidMount() {
           const id = this.props.match.params.pId
-          this.props.getPlace(id)
+          return this.props.getPlace(id)
      }
      componentWillReceiveProps(nextProps){
         console.log("componentDidMount",nextProps)
 
-        nextProps.place
-        ?
-        this.setState({ ...nextProps.place.location })
-        :
-        ''
+        if (nextProps.place) {
+            this.setState({ ...nextProps.place.location })
+        }
 
      }
 
@@ -51,7 +49,7 @@ class Update_Place extends React.Component {
         return (
             <div>
                 {loading && <div>Loading....</div>}
-                <PlaceForm onSubmit={this.handleSubmit}  setLatLng={this.setLatLng}  initialValues={initVals}  />
+                <PlaceForm onSubmit={this.handleSubmit.bind(this)}  setLatLng={this.setLatLng}  initialValues={initVals}  />
             </div>
         )
     }

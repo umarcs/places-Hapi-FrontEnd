@@ -3,13 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "PORT=3006 react-scripts start",
+    "start": "PORT=3006 react-scripts start ",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+
+
+
+
+    "test": "react-scripts test --env=jsdom --single-run",
+
     "eject": "react-scripts eject"
   },
   "dependencies": {
     "autoprefixer": "^6.0.3",
+    "axios": "^0.18.0",
     "babel-core": "^6.10.4",
     "babel-eslint": "^4.1.6",
     "babel-jscs": "^2.0.5",

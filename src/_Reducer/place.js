@@ -46,14 +46,31 @@ export default function (state = initialState, action) {
                 error: action.payload
             };
             break;
+
         case "UPDATE_PLACE":
             return {
                 ...state,
+                loading: true,
+                place: null
+            };
+            break;
+        case "UPDATE_PLACE_SUCCESS":
+            return {
+                ...state,
+                loading: false,
                 place: action.payload
             };
             break;
+        case "UPDATE_PLACE_FAIL":
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            };
+
+            break;
     }
 
-    
+
     return state;
 }
