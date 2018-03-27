@@ -12,13 +12,12 @@ let apiBaseUrl = 'http://localhost:2002/api';
 
 //let apiBaseUrl = 'http://209.250.243.231:2002/api';
 
-let apiBaseUrl = '/';
-if(process.env.NODE_ENV == 'production') {
-    apiBaseUrl = 'http://209.250.243.231:4000'
-} else {
-    apiBaseUrl = 'http://localhost:2002'
-}
-
+// // let apiBaseUrl = '/';
+// // if(process.env.NODE_ENV == 'production') {
+// //     apiBaseUrl = 'http://209.250.243.231:4000'
+// // } else {
+// //     apiBaseUrl = 'http://localhost:2000'
+// //}
 
 //get places
 export function getPlaces(query) {
