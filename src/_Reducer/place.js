@@ -1,10 +1,11 @@
 
 let initialState = {
     places: [],
-    place: {}
+    place: null,
+    loading: false,
 }
 export default function (state = initialState, action) {
-    console.log("palceeeee", action.type)
+    console.log("action", action)
     switch (action.type) {
         case "GET_PLACES":
             return {
@@ -27,11 +28,49 @@ export default function (state = initialState, action) {
         case "GET_PLACE":
             return {
                 ...state,
+                loading: true,
+                place: null
+            };
+            break;
+        case "GET_PLACE_SUCCESS":
+            return {
+                ...state,
+                loading: false,
                 place: action.payload
             };
             break;
+        case "GET_PLACE_FAIL":
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            };
+            break;
+
+        case "UPDATE_PLACE":
+            return {
+                ...state,
+                loading: true,
+                place: null
+            };
+            break;
+        case "UPDATE_PLACE_SUCCESS":
+            return {
+                ...state,
+                loading: false,
+                place: action.payload
+            };
+            break;
+        case "UPDATE_PLACE_FAIL":
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            };
+
+            break;
     }
 
-    
+
     return state;
 }

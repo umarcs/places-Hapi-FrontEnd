@@ -13,10 +13,9 @@ class Login extends Component {
 
         componentWillReceiveProps(nextProps) {
             if(nextProps.user.login) {
-                window.location.reload()
+                window.location.reload();
             }
         }
-
         loginFunc(vals) {
            return this.props.login(vals)
         }
@@ -31,8 +30,8 @@ class Login extends Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.user,
-    };
+        user: state.user
+    }
 }
 
 function mapDispathToProps(dispatch) {

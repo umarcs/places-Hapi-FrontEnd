@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Home from './_Component/home/body';
-import { BrowserRouter, Route, Link, NavLink, Switch, Redirect, Prompt } from 'react-router-dom';
-import { NestedRoute, SubRoute } from 'react-nested-route'
+import { BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import UserDashboard from './_Component/dashboard/body'
 import { bindActionCreators } from 'redux';
@@ -9,13 +8,13 @@ import { connect } from 'react-redux';
 import { getUserDataByToken } from './_Action/user'
 import { getCategories } from './_Action/category'
 
-import addPlace from './_Component/user/addPlace'
-import userPlaces from './_Component/user/userPlaces'
+import addPlace from './_Container/places/addPlace'
+import userPlaces from './_Component/places/userPlaces'
 import updateUser from './_Container/user/updateUser';
-import updatePlace from './_Component/user/updatePlace';
+import updatePlace from './_Container/places/updatePLace';
 import profile from './_Component/user/profile';
 import placeDetail from './_Component/places/details'
-import places from './_Component/places/places';
+import searchPlaces from './_Component/places/searchPlaces';
 import categories from './_Component/categories/categories'
 
 class App extends Component {
@@ -23,8 +22,10 @@ class App extends Component {
    // alert("app")
 
     if (localStorage.token) {
-      this.props.getUserDataByToken(); ``
+      this.props.getUserDataByToken(); 
       this.props.getCategories();
+     
+
     }
   }
 
@@ -38,20 +39,22 @@ class App extends Component {
               (localStorage.getItem("token"))
                 ?
                 <UserDashboard>
-                  {/* <Redirect to='/profile' from='/'  /> */}
-                  <Route exact path="/profile" component={profile} />
-                  <Route exact path="/Myplaces/add-place" component={addPlace} />
-                  <Route exact path="/Myplaces" component={userPlaces} />
+                  {/* <Redirect exact to='/profile' from='/'  /> */}
+                  <Route exact path="/profile" component={profile} />                  
                   <Route exact path="/profile/update-profile" component={updateUser} />
-                  <Route exact path="/Myplaces/update-place/id/:pId" component={updatePlace} />
+                  <Route exact path="/places" component={userPlaces} />
+                  <Route exact path="/places/add-place" component={addPlace} />
+                  <Route exact path="/places/update-place/:pId" component={updatePlace} />
+                  
                 </UserDashboard>
                 :
-                <Redirect to="/" from='/profile' />
-
+                  ''
+                //  <Redirect to="/"  />
+                
             }
             <Home>
-              <Route exact path="/" component={categories} />
-              <Route exact path="/places" component={places} />
+            <Route exact path="/" component={categories} />
+              <Route exact path="/places" component={searchPlaces} />
               <Route exact path="/places/d/:pId" component={placeDetail} />
             </Home>
           </Switch>
