@@ -9,7 +9,7 @@
 
 
 
-    "test": "react-scripts test --env=jsdom --single-run",
+    "test": "react-scripts test --env=jsdom ",
 
     "eject": "react-scripts eject"
   },
